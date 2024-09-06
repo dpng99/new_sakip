@@ -1,72 +1,49 @@
 <?php
-include 'C:\xampp\htdocs\new_sakip\sakip\mr.db.php';
-
-$db = mysqli_connect($server, $username, $password, $database) or die(mysqli_error($db));
-
-// Inisialisasi variabel $kejati dan $kejari sebagai array kosong
-$kejati = array();
-$kejari = array();
+include 'C:\xampp\htdocs\new_sakip\sakip\mr.db.php'; 
+$db = mysqli_connect("$server", "$username", "$password", "$database") or die(mysqli_error($db));
 
 // Query untuk mendapatkan data satker
 $hmpun_stker = mysqli_query($db, "SELECT id_satker, id_kejati, id_kejari, satkernama, id_level, id_sakip_level FROM sinori_login");
 
-// Iterasi hasil query
+if (!$hmpun_stker) {
+    die("Query Error: " . mysqli_error($db));
+}
+
+// Array untuk menyimpan data kejati dan kinerjanya
+$data_total = array();
+
+// Penyortiran berdasarkan id_sakip_level (kejati)
 while ($hasil1 = mysqli_fetch_array($hmpun_stker, MYSQLI_ASSOC)) {
     if ($hasil1['id_sakip_level'] == '2') {
-        $kejati[] = $hasil1; // Tambahkan data ke array $kejati
-    } elseif($hasil1['id_kejari'] != '0') {
-        $kejari[] = $hasil1; // Tambahkan data ke array $kejari
+        // Ambil id_satker
+        $id_satker = $hasil1['id_satker'];
+
+        // Ambil data kinerja berdasarkan id_satker
+        $himpn_kinerja_kejati = mysqli_query($db, "SELECT id_tahun, id_bidang, id_saspro, id_indikator, id_target, id_realisasi_tw1, id_realisasi_tw2, id_realisasi_tw3, id_realisasi_tw4 FROM sinori_sakip_penetapan WHERE id_satker = '$id_satker'");
+
+        if (!$himpn_kinerja_kejati) {
+            die("Query Error: " . mysqli_error($db));
+        }
+
+        // Gabungkan data satker dan kinerjanya
+        while ($kinerja = mysqli_fetch_array($himpn_kinerja_kejati, MYSQLI_ASSOC)) {
+            // Ambil nama indikator dari id_indikator di tabel sinori_sakip_indikator
+            $id_indikator = $kinerja['id_indikator'];
+            $himpn_indikator_sakip = mysqli_query($db, "SELECT id, indikator_nama FROM sinori_sakip_indikator WHERE id = '$id_indikator'");
+
+            if (!$himpn_indikator_sakip) {
+                die("Query Error: " . mysqli_error($db));
+            }
+
+            // Gabungkan data indikator, satker, dan kinerjanya
+            while ($indikator = mysqli_fetch_array($himpn_indikator_sakip, MYSQLI_ASSOC)) {
+                $data_total[] = array_merge($indikator, $hasil1, $kinerja);
+            }
+        }
     }
 }
-// Variabel untuk paginasi
-$limit = 10; // Batas data per halaman
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$start = ($page - 1) * $limit; // Menghitung offset data
-
-// Pencarian (search)
-$search = isset($_GET['search']) ? $_GET['search'] : '';
-
-// Fungsi ekspor ke CSV
-if (isset($_GET['export']) && $_GET['export'] === 'csv') {
-    header('Content-Type: text/csv');
-    header('Content-Disposition: attachment; filename="data_kejati_kejari.csv"');
-    
-    $output = fopen("php://output", "w");
-    fputcsv($output, array('ID Satker', 'ID Kejati', 'ID Kejari', 'Satker Nama', 'ID Level', 'ID Sakip Level', 'ID Tahun', 'ID Bidang', 'ID Saspro', 'ID Indikator', 'Target', 'Realisasi TW1', 'Realisasi TW2', 'Realisasi TW3', 'Realisasi TW4'));
-    
-    foreach (array_merge($kejati, $kejari) as $data) {
-        fputcsv($output, $data);
-    }
-    fclose($output);
-    exit;
-}
-
-// Fungsi ekspor ke Excel
-if (isset($_GET['export']) && $_GET['export'] === 'excel') {
-    header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment; filename="data_kejati_kejari.xls"');
-    
-    echo "<table border='1'>";
-    echo "<tr>
-            <th>ID Satker</th><th>Satker Nama</th><th>ID Level</th><th>ID Sakip Level</th>
-            <th>ID Tahun</th><th>ID Bidang</th><th>ID Saspro</th><th>ID Indikator</th><th>Target</th>
-            <th>Realisasi TW1</th><th>Realisasi TW2</th><th>Realisasi TW3</th><th>Realisasi TW4</th>
-          </tr>";
-    
-    foreach (array_merge($kejati, $kejari) as $data) {
-        echo "<tr>
-                <td>{$data['id_satker']}</td><td>{$data['satkernama']}</td><td>{$data['id_level']}</td><td>{$data['id_sakip_level']}</td><td>{$data['id_tahun']}</td><td>{$data['id_bidang']}</td>
-                <td>{$data['id_saspro']}</td><td>{$data['id_indikator']}</td><td>{$data['id_target']}</td><td>{$data['id_realisasi_tw1']}</td>
-                <td>{$data['id_realisasi_tw2']}</td><td>{$data['id_realisasi_tw3']}</td><td>{$data['id_realisasi_tw4']}</td>
-              </tr>";
-    }
-    
-    echo "</table>";
-    exit;
-}
-
-// Menampilkan hasil dalam bentuk tabel HTML
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,79 +64,57 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
         th {
             background-color: #f2f2f2;
         }
-        .pagination a {
-            margin: 0 5px;
-            text-decoration: none;
-            padding: 8px 16px;
-            border: 1px solid #ddd;
-            color: #000;
-        }
-        .pagination a.active {
-            background-color: #4CAF50;
-            color: white;
-        }
     </style>
 </head>
 <body>
 
-<!-- Form Pencarian -->
-<form id="searchForm" method="GET">
-    <label for="search">Cari berdasarkan ID Satker atau Nama Satker:</label>
-    <input type="text" id="search" name="search" value="<?= htmlspecialchars($search) ?>">
-    <button type="submit">Cari</button>
-</form>
+<h2>Data Kejati</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID Satker</th>
+            <th>Satker Nama</th>
+            <th>ID Level</th>
+            <th>ID Sakip Level</th>
+            <th>ID Tahun</th>
+            <th>ID Bidang</th>
+            <th>Indikator Nama</th>
+            <th>ID Saspro</th>
+            <th>ID Indikator</th>
+            <th>Target</th>
+            <th>Realisasi TW1</th>
+            <th>Realisasi TW2</th>
+            <th>Realisasi TW3</th>
+            <th>Realisasi TW4</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (!empty($data_total)) : ?>
+            <?php foreach ($data_total as $data) : ?>
+            <tr>
+                <td><?= htmlspecialchars($data['id_satker']) ?></td>
+                <td><?= htmlspecialchars($data['satkernama']) ?></td>
+                <td><?= htmlspecialchars($data['id_level']) ?></td>
+                <td><?= htmlspecialchars($data['id_sakip_level']) ?></td>
+                <td><?= htmlspecialchars($data['id_tahun']) ?></td>
+                <td><?= htmlspecialchars($data['id_bidang']) ?></td>
+                <td><?= htmlspecialchars($data['indikator_nama']) ?></td>
+                <td><?= htmlspecialchars($data['id_saspro']) ?></td>
+                <td><?= htmlspecialchars($data['id_indikator']) ?></td>
+                <td><?= htmlspecialchars($data['id_target']) ?></td>
+                <td><?= htmlspecialchars($data['id_realisasi_tw1']) ?></td>
+                <td><?= htmlspecialchars($data['id_realisasi_tw2']) ?></td>
+                <td><?= htmlspecialchars($data['id_realisasi_tw3']) ?></td>
+                <td><?= htmlspecialchars($data['id_realisasi_tw4']) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <tr>
+                <td colspan="14">Tidak ada data ditemukan.</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
 
-<!-- Tombol Ekspor -->
-<form method="GET" action="">
-    <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
-    <button type="submit" name="export" value="csv">Ekspor ke CSV</button>
-    <button type="submit" name="export" value="excel">Ekspor ke Excel</button>
-</form>
-<div id="table-container">
-
-</div>
-
-<!-- Paginasi -->
-<div class="pagination" id="pagination-container">
-
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    // Fungsi untuk memuat data tabel dan paginasi secara AJAX
-    function loadTable(page = 1, search = '') {
-        $.ajax({
-            url: "ajak_handler.php", // Endpoint untuk menangani AJAX
-            type: "GET",
-            data: {
-                page: page,
-                search: search
-            },
-            success: function (response) {
-                // Update tabel dan paginasi di halaman
-                $('#table-container').html(response.table);
-                $('#pagination-container').html(response.pagination);
-            }
-        });
-    }
-
-    // Pencarian form submit handler
-    $('#searchForm').on('submit', function (e) {
-        e.preventDefault(); // Mencegah reload halaman
-        let search = $('#search').val(); // Ambil input pencarian
-        loadTable(1, search); // Panggil AJAX loadTable dengan pencarian
-    });
-
-    // Paginasi klik handler
-    $(document).on('click', '.pagination a', function (e) {
-        e.preventDefault(); // Mencegah reload halaman
-        let page = $(this).attr('data-page'); // Ambil halaman dari pagination link
-        let search = $('#search').val(); // Ambil input pencarian
-        loadTable(page, search); // Panggil AJAX loadTable dengan halaman dan pencarian
-    });
-
-    // Load tabel pertama kali
-    loadTable(); // Panggil dengan halaman default 1 dan pencarian kosong
-</script>
-?>
 </body>
 </html>
