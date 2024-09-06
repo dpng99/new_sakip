@@ -1,0 +1,433 @@
+/*
+Chendia Studio - Crypticsoft Ihkeren Indomedia 2002 - 2013 
+www.ihkeren.com
+Name : Modul CSS versi 2.1
+*/
+BODY {
+	SCROLLBAR-FACE-COLOR: #CECECE; 
+	SCROLLBAR-HIGHLIGHT-COLOR: #CECECE; 
+	SCROLLBAR-SHADOW-COLOR: #CECECE; 
+	SCROLLBAR-3DLIGHT-COLOR: #CECECE; 
+	SCROLLBAR-ARROW-COLOR: #000000; 
+	SCROLLBAR-TRACK-COLOR: #E0E0E0; 
+	SCROLLBAR-DARKSHADOW-COLOR: #000000; 
+	FONT-SIZE: 11px; 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+	margin-top: 0px;
+
+
+}
+TABLE {
+	FONT-SIZE: 11px; 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+TD {
+	FONT-SIZE: 11px; 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+TEXTAREA {
+	FONT-SIZE: 11px; 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	style=border-top: 1px dotted #CCCCCC;
+}
+input {
+	font-family: tahoma; 
+	font-size: 12px; 
+	color: #000000; 
+	background-color:#CFB10A; 
+	border: solid 1px; 
+	border-color: #000000
+}
+input, select, textarea{
+    color: #000000;
+	
+}
+
+textarea:focus, input:focus {
+    color: #000000;
+background-color: #FF934A; 
+}
+A {
+	COLOR: #000000; 
+	TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #999999; 
+	TEXT-DECORATION: underline
+}
+.panel  {
+	-moz-border-radius: .3em .3em .3em .3em; 
+	border: 1px dotted silver; 
+	background-color: #FFFFFF;
+}
+A.menulink {
+	display: block;
+	width: 170px;
+	text-align: left;
+	text-decoration: none;
+	font-family:arial;
+	font-size:12px;
+	color: #FFFFFF;
+	BORDER: none;
+	border: solid 1px #005CB9;
+}
+A.menulink:hover {
+	font-size:12px;
+	color: #FFFFFF;
+	border: solid 1px #0066CC;
+	background-color:#4FA7FF;
+}
+
+A.menulinkb {
+	display: block;
+	width: 100px;
+	text-align: center;
+	text-decoration: none;
+	font-family:arial;
+	font-size:12px;
+	color: #FFFFFF;
+	BORDER: none;
+	border: solid 1px #FF9900;
+}
+A.menulinkb:hover {
+	font-size:12px;
+	color: #FFFFFF;
+	border: solid 1px #FF3300;
+	background-color:#FF9900;
+}
+.listing {
+	PADDING-RIGHT: 0px; 
+	BORDER-TOP: #666666 0px solid; 
+	DISPLAY: block; 
+	PADDING-LEFT: 0px; 
+	PADDING-BOTTOM: 0px; 
+	MARGIN: 0px; 
+	WIDTH: 180px; 
+	PADDING-TOP: 0px; 
+	TEXT-ALIGN: left
+}
+.listing LI {
+	DISPLAY: block; 
+	MARGIN: 0px 0px 0px; 
+	WIDTH: 180px; 
+	LIST-STYLE-TYPE: none
+}
+.listing LI A {
+	PADDING-RIGHT: 0px; 
+	DISPLAY: block; 
+	PADDING-LEFT: 21px; 
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 12px; 
+	BACKGROUND:  #666666 no-repeat 5px center; 
+	PADDING-BOTTOM: 6px; 
+	WIDTH: 180px; 
+	COLOR: #CCCCCC; 
+	PADDING-TOP: 6px; 
+	TEXT-DECORATION: none
+}
+.listing LI A:hover {
+	BACKGROUND: #000000 no-repeat 5px center
+}
+#pageContent{
+		width:760px;
+		margin:0 auto;
+		text-align:left;
+		border-left:1px solid #000;
+		border-right:1px solid #000;
+		background-color:#FFF;
+		height:100%;
+	}
+	#pageContent p{
+		padding-left:10px;
+		padding-right:10px;
+	}
+	#dhtmlgoodies_progressPane{
+		width:781px;
+		height:1007px;
+		background-color:#FFF;
+		z-index:5000;
+		position:absolute;
+		left:0px;
+		top:0px;
+	}
+	#dhtmlgoodies_progressBar_bg{
+		position:absolute;
+		left:348px;
+		top:119px;
+		width:300px;
+		height:20px;
+		border:1px solid #000;
+		background-color:#EEE;
+		margin-left:-150px;	
+		margin-top:-20px;
+		text-align:center;
+	}
+	#dhtmlgoodies_progressBar_outer{
+		position:absolute;
+		left:0px;
+		top:0px;
+		width:0px;	
+		height:100%;
+		overflow:hidden;	
+	}
+	#dhtmlgoodies_progressBar{
+		position:absolute;
+		left:0px;
+		top:0px;
+		width:300px;
+		background-color:#184EB8;
+		filter: Alpha(Opacity=0, FinishOpacity=100,Style=1,StartX=0, StartY=0, FinishX=200,FinishY=20) ;
+		height:100%;
+		z-index:5000;
+	}
+	#dhtmlgoodies_progressBar_txt{
+		color:#000;
+		z-index:10000;
+		width:100%;
+		height:100%;
+		left:0px;
+		top:0px;
+		position:absolute;		
+		font-family:arial;
+		font-size:0.8em;
+		line-height:20px;	
+}
+/* on panic room someone do stupid choice */
+.panic,
+.panic{
+/*	margin:5px 4px 5px 14px;*/
+		margin:1px 1px 1px 1px;
+	padding:0;
+	display:inline;
+	float:left;
+	overflow:hidden;
+	border:1;
+}
+/* class menu */
+a.menu:link,
+a.menu:active,
+a.menu:visited,
+a.menu:link,
+a.sublevel:active,
+a.sublevel:visited {
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size:11px;
+	line-height: 20px;
+}
+a.menu:hover,
+#leftcol a.menu:hover {
+	background-color:#EA7500;
+	color:#FFFFFF!important;
+	text-decoration:none!important;
+}
+.menu  {
+	display:block;
+	height:30px;
+	line-height:20px;
+	padding-left:20px;
+	background:#336600 repeat-x center top;
+	font-weight:bold;
+	text-decoration:none;
+}
+a.menupidsus:link,
+a.menupidsus:active,
+a.menupidsus:visited,
+a.menupidsus:link,
+a.sublevel:active,
+a.sublevel:visited {
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size:11px;
+	line-height: 20px;
+}
+a.menupidsus:hover,
+#leftcol a.menupidum:hover {
+	background-color:#FF158A;
+	color:#FFFFFF!important;
+	text-decoration:none!important;
+}
+.menupidsus  {
+	display:block;
+	height:30px;
+	line-height:20px;
+	padding-left:20px;
+	background:#990033 repeat-x center top;
+	font-weight:bold;
+	text-decoration:none;
+}
+a.menupidum:link,
+a.menupidum:active,
+a.menupidum:visited,
+a.menupidum:link,
+a.sublevel:active,
+a.sublevel:visited {
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size:11px;
+	line-height: 20px;
+}
+a.menupidum:hover,
+#leftcol a.menupidsus:hover {
+	background-color:#FF158A;
+	color:#FFFFFF!important;
+	text-decoration:none!important;
+}
+.menupidum  {
+	display:block;
+	height:30px;
+	line-height:20px;
+	padding-left:20px;
+	background:#FF0000 repeat-x center top;
+	font-weight:bold;
+	text-decoration:none;
+}
+a.menuintel:link,
+a.menuintel:active,
+a.menuintel:visited,
+a.menuintel:link,
+a.subintel:active,
+a.subintel:visited {
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size:11px;
+	line-height: 20px;
+}
+a.menuintel:hover,
+#leftcol a.menuintel:hover {
+	background-color:#009966;
+	color:#FFFFFF!important;
+	text-decoration:none!important;
+}
+.menuintel  {
+	display:block;
+	height:30px;
+	line-height:20px;
+	padding-left:20px;
+	background:#003300 repeat-x center top;
+	font-weight:bold;
+	text-decoration:none;
+}
+a.menubin:link,
+a.menubin:active,
+a.menubin:visited,
+a.menubin:link,
+a.subbin:active,
+a.subbin:visited {
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size:11px;
+	line-height: 20px;
+}
+a.menubin:hover,
+#leftcol a.menubin:hover {
+	background-color:#000000;
+	color:#FFCC99!important;
+	text-decoration:none!important;
+}
+.menubin  {
+	display:block;
+	height:30px;
+	line-height:20px;
+	padding-left:20px;
+	background:#FFCC00 repeat-x center top;
+	font-weight:bold;
+	text-decoration:none;
+}
+a.menudatun:link,
+a.menudatun:active,
+a.menudatun:visited,
+a.menudatun:link,
+a.subdatun:active,
+a.subdatun:visited {
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size:11px;
+	line-height: 20px;
+}
+a.menudatun:hover,
+#leftcol a.menudatun:hover {
+	background-color:#FFFFCC;
+	color:#000000!important;
+	text-decoration:none!important;
+}
+.menudatun  {
+	display:block;
+	height:30px;
+	line-height:20px;
+	padding-left:20px;
+	background:#FF6600 repeat-x center top;
+	font-weight:bold;
+	text-decoration:none;
+}
+a.menuall:link,
+a.menuall:active,
+a.menuall:visited,
+a.menuall:link,
+a.suball:active,
+a.suball:visited {
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size:11px;
+	line-height: 20px;
+}
+a.menuall:hover,
+#leftcol a.menuall:hover {
+	background-color:#666666;
+	color:#FFFFFF!important;
+	text-decoration:none!important;
+}
+.menuall  {
+	display:block;
+	height:30px;
+	line-height:20px;
+	padding-left:20px;
+	background:#000000 repeat-x center top;
+	font-weight:bold;
+	text-decoration:none;
+}
+/* DIV float */
+div.sample_attach, a.sample_attach
+{
+  width: 180px;
+  border: 1px solid white;
+  background: #000000;
+  font-weight: 900;
+  color: #ffffff;
+}
+a.sample_attach
+{
+  display: block;
+  border-bottom: none;
+  text-decoration: none;
+}
+form.sample_attach
+{
+	position: absolute;
+	visibility: hidden;
+	border: 1px solid black;
+	background: #FFFFEE;
+	padding: 0px 5px 2px 5px;
+	left: 144px;
+	top: 149px;
+}
+/* DIV Scrolling */
+.scrolling {
+	PADDING-RIGHT: 15px; PADDING-LEFT: 15px; BACKGROUND: url(./images/ico_next.gif) no-repeat left top; PADDING-BOTTOM: 11px; PADDING-TOP: 11px
+}
+#scroller {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; OVERFLOW: hidden; WIDTH: 450px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none; HEIGHT: 60px; TEXT-ALIGN: center
+}
+#scroller LI {
+	PADDING-RIGHT: 7px; PADDING-LEFT: 7px; FLOAT: left; PADDING-BOTTOM: 3px; MARGIN: 0px; WIDTH: 65px; PADDING-TOP: 3px; HEIGHT: 43px
+}
+div.first {
+  background: rgba(76, 175, 80, 0.1);
+}
+img {
+  opacity: 0.5;
+}
+
+img:hover {
+  opacity: 1.0;
+}

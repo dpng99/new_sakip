@@ -1,0 +1,16 @@
+function sumArray($array) {
+    $total = 0;
+    foreach ($array as $value) {
+        $total += $value;
+    }
+    return $total;
+}
+
+/** Your array **/
+$sumArray = array(4, 256, 5, 13, 1);
+
+/** Calling function **/
+$myAnswer = sumArray($sumArray);
+
+/** Your result **/
+echo $myAnswer; //279 result

@@ -1,0 +1,7 @@
+[24-Jun-2024 04:22:32 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'ihkerenc_rb'@'localhost' (using password: YES) in /home/panevkejaksaan/public_html/mr.db.php on line 8
+[24-Jun-2024 04:22:37 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'ihkerenc_rb'@'localhost' (using password: YES) in /home/panevkejaksaan/public_html/mr.db.php on line 8
+[24-Jun-2024 04:22:41 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'ihkerenc_rb'@'localhost' (using password: YES) in /home/panevkejaksaan/public_html/mr.db.php on line 8
+[24-Jun-2024 04:22:45 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'ihkerenc_rb'@'localhost' (using password: YES) in /home/panevkejaksaan/public_html/mr.db.php on line 8
+[24-Jun-2024 04:23:07 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'ihkerenc_rb'@'localhost' (using password: YES) in /home/panevkejaksaan/public_html/mr.db.php on line 8
+[24-Jun-2024 04:23:11 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'ihkerenc_rb'@'localhost' (using password: YES) in /home/panevkejaksaan/public_html/mr.db.php on line 8
+[24-Jun-2024 04:23:12 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'ihkerenc_rb'@'localhost' (using password: YES) in /home/panevkejaksaan/public_html/mr.db.php on line 8
