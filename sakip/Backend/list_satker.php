@@ -28,16 +28,31 @@ while ($hasil1 = mysqli_fetch_array($hmpun_stker, MYSQLI_ASSOC)) {
         // Gabungkan data satker dan kinerjanya
         while ($kinerja = mysqli_fetch_array($himpn_kinerja_kejati, MYSQLI_ASSOC)) {
             // Ambil nama indikator dari id_indikator di tabel sinori_sakip_indikator
+            $idsaspro = $kinerja['id_saspro'];
             $id_indikator = $kinerja['id_indikator'];
+
+            // Query untuk mendapatkan data indikator
             $himpn_indikator_sakip = mysqli_query($db, "SELECT id, indikator_nama FROM sinori_sakip_indikator WHERE id = '$id_indikator'");
 
             if (!$himpn_indikator_sakip) {
                 die("Query Error: " . mysqli_error($db));
             }
 
-            // Gabungkan data indikator, satker, dan kinerjanya
+            // Ambil data indikator
             while ($indikator = mysqli_fetch_array($himpn_indikator_sakip, MYSQLI_ASSOC)) {
-                $data_total[] = array_merge($indikator, $hasil1, $kinerja);
+                
+                // Query untuk mendapatkan data saspro
+                $himpn_saspro_sakip = mysqli_query($db, "SELECT id, saspro_nama FROM sinori_sakip_saspro WHERE id = '$idsaspro'");
+
+                if (!$himpn_saspro_sakip) {
+                    die("Query Error: " . mysqli_error($db));
+                }
+
+                // Ambil data saspro
+                while ($saspro = mysqli_fetch_array($himpn_saspro_sakip, MYSQLI_ASSOC)) {
+                    // Gabungkan data satker, kinerja, indikator, dan saspro ke dalam array $data_total
+                    $data_total[] = array_merge($hasil1, $kinerja, $indikator, $saspro);
+                }
             }
         }
     }
@@ -80,6 +95,7 @@ while ($hasil1 = mysqli_fetch_array($hmpun_stker, MYSQLI_ASSOC)) {
             <th>ID Bidang</th>
             <th>Indikator Nama</th>
             <th>ID Saspro</th>
+            <th>Saspro Nama</th>
             <th>ID Indikator</th>
             <th>Target</th>
             <th>Realisasi TW1</th>
@@ -100,6 +116,7 @@ while ($hasil1 = mysqli_fetch_array($hmpun_stker, MYSQLI_ASSOC)) {
                 <td><?= htmlspecialchars($data['id_bidang']) ?></td>
                 <td><?= htmlspecialchars($data['indikator_nama']) ?></td>
                 <td><?= htmlspecialchars($data['id_saspro']) ?></td>
+                <td><?= htmlspecialchars($data['saspro_nama']) ?></td>
                 <td><?= htmlspecialchars($data['id_indikator']) ?></td>
                 <td><?= htmlspecialchars($data['id_target']) ?></td>
                 <td><?= htmlspecialchars($data['id_realisasi_tw1']) ?></td>
