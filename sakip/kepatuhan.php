@@ -10,7 +10,7 @@ body {
 <table width="100%"  border="0" cellspacing="4" cellpadding="4">
   <tr>
     <td width="11%"><div align="left"><img src="images/terkirim.png" width="196" height="47"></div></td>
-    <td width="89%"><strong>DASHBOARD PEMANTAUAN KEPATUHAN PELAKSANAAN AKIP 1</strong></td>
+    <td width="89%"><strong>DASHBOARD PEMANTAUAN KEPATUHAN PELAKSANAAN AKIP </strong></td>
   </tr>
   <tr>
     <td colspan="2">&nbsp;</td>
@@ -48,7 +48,10 @@ print ('
 <td width="5%"><center>Renstra</center></td>
 <td width="5%"><center>Renja</center></td>
 <td width="5%"><center>PK</center></td>
+<td width="10%"><center>Pengukuran Kinerja TW I</center></td>
+<td width="10%"><center>Pengukuran Kinerja TW II</center></td>
 <td width="15%"><center>Jumlah Capaian Kinerja</center></td>
+<td width="10%"><center>Narasi/center></td>
 <td width="5%"><center>IKU</center></td>
 <td width="5%"><center>DPA</center></td>
 <td width="5%"><center>Ren Aksi</center></td>
