@@ -10,7 +10,7 @@ body {
 <table width="100%"  border="0" cellspacing="4" cellpadding="4">
   <tr>
     <td width="11%"><div align="left"><img src="images/terkirim.png" width="196" height="47"></div></td>
-    <td width="89%"><strong>DASHBOARD PEMANTAUAN KEPATUHAN PELAKSANAAN AKIP </strong></td>
+    <td width="89%"><strong>DASHBOARD PEMANTAUAN KEPATUHAN PELAKSANAAN AKIP 1</strong></td>
   </tr>
   <tr>
     <td colspan="2">&nbsp;</td>
