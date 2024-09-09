@@ -251,17 +251,6 @@ function renderTable($data, $tableId) {
     <button class="btn" onclick="showTable(5)">Sasaran Strategis 5</button>
     <button class="btn" onclick="showTable(6)">Sasaran Strategis 6</button>
 </div>
-
-<?php
-// Render tables for each indicator
-renderTable($data_indikator1, 'data_indikator1');
-renderTable($data_indikator2, 'data_indikator2');
-renderTable($data_indikator3, 'data_indikator3');
-renderTable($data_indikator4, 'data_indikator4');
-renderTable($data_indikator5, 'data_indikator5');
-renderTable($data_indikator6, 'data_indikator6');
-?>
-
 <!-- Averages for each indicator -->
 <div class="averages-container hidden" id="averages1">
     <?php renderAverages($data_indikator1); ?>
@@ -281,6 +270,18 @@ renderTable($data_indikator6, 'data_indikator6');
 <div class="averages-container hidden" id="averages6">
     <?php renderAverages($data_indikator6); ?>
 </div>
+<?php
+
+// Render tables for each indicator
+renderTable($data_indikator1, 'data_indikator1');
+renderTable($data_indikator2, 'data_indikator2');
+renderTable($data_indikator3, 'data_indikator3');
+renderTable($data_indikator4, 'data_indikator4');
+renderTable($data_indikator5, 'data_indikator5');
+renderTable($data_indikator6, 'data_indikator6');
+?>
+
+
 
 <!-- Pagination Controls -->
 <div class="pagination"></div>
