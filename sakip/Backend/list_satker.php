@@ -116,6 +116,28 @@ function renderTable($data, $tableId) {
         </thead>";
         echo "<tbody>";
         foreach ($data as $row) {
+
+            $tw1 = $row['id_realisasi_tw1'] ?? 0;
+            $tw2 = $row['id_realisasi_tw2'] ?? 0;
+            $tw3 = $row['id_realisasi_tw3'] ?? 0;
+            $tw4 = $row['id_realisasi_tw4'] ?? 0;
+            $target = $row['id_target'] ?? 0;
+
+            // Determine the latest filled TW
+            $latestTW = 0;
+            if ($tw4 > 0) {
+                $latestTW = $tw4;
+            } elseif ($tw3 > 0) {
+                $latestTW = $tw3;
+            } elseif ($tw2 > 0) {
+                $latestTW = $tw2;
+            } elseif ($tw1 > 0) {
+                $latestTW = $tw1;
+            }
+
+            // Verify if the latest TW is below the target
+            $verification = ($latestTW < $target) ? "Tidak Tercapai" : "Tercapai";
+            $color = ($verification == "Tercapai") ? "green" : "red";    
             echo "<tr>";
             echo "<td>" . htmlspecialchars($row['id_satker']) . "</td>";
             echo "<td>" . htmlspecialchars($row['satkernama']) . "</td>";
@@ -127,6 +149,7 @@ function renderTable($data, $tableId) {
             echo "<td>" . htmlspecialchars($row['id_realisasi_tw2']) . "</td>";
             echo "<td>" . htmlspecialchars($row['id_realisasi_tw3']) . "</td>";
             echo "<td>" . htmlspecialchars($row['id_realisasi_tw4']) . "</td>";
+            echo "<td style='color: $color; font-weight: bold;'>" . htmlspecialchars($verification) . "</td>"; // New verification column with color
             echo "</tr>";
         }
         echo "</tbody></table>";
