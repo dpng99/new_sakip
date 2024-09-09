@@ -58,13 +58,25 @@ mysqli_close($db);
 // Function to compute averages
 function computeAverages($data) {
     $tw1_sum = $tw2_sum = $tw3_sum = $tw4_sum = 0;
-    $count = count($data);
+    $count = 0;
 
     foreach ($data as $row) {
+        // Check if all TW values are 0
+        if (($row['id_realisasi_tw1'] ?? 0) == 0 && 
+            ($row['id_realisasi_tw2'] ?? 0) == 0 && 
+            ($row['id_realisasi_tw3'] ?? 0) == 0 && 
+            ($row['id_realisasi_tw4'] ?? 0) == 0) {
+            continue;  // Skip this row
+        }
+
+        // Sum up the values for the non-zero rows
         $tw1_sum += $row['id_realisasi_tw1'] ?? 0;
         $tw2_sum += $row['id_realisasi_tw2'] ?? 0;
         $tw3_sum += $row['id_realisasi_tw3'] ?? 0;
         $tw4_sum += $row['id_realisasi_tw4'] ?? 0;
+
+        // Increment the count for valid rows
+        $count++;
     }
 
     return [
@@ -121,6 +133,71 @@ function renderTable($data, $tableId) {
     } else {
         echo "<table id='$tableId' class='data-table hidden'>";
         echo "<tr><td colspan='10'>No data found.</td></tr></table>";
+    }
+}
+// Function to export data to Excel
+function exportToExcel($data, $filename) {
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    echo '<table border="1">';
+    echo '<tr>
+            <th>ID Satker</th>
+            <th>Satker Nama</th>
+            <th>ID Tahun</th>
+            <th>ID Indikator</th>
+            <th>Indikator Nama</th>
+            <th>Target</th>
+            <th>Realisasi TW1</th>
+            <th>Realisasi TW2</th>
+            <th>Realisasi TW3</th>
+            <th>Realisasi TW4</th>
+          </tr>';
+
+    // Loop through data and fill table rows
+    foreach ($data as $entry) {
+        echo '<tr>';
+        echo '<td>' . $entry['id_satker'] . '</td>';
+        echo '<td>' . $entry['satkernama'] . '</td>';
+        echo '<td>' . $entry['id_tahun'] . '</td>';
+        echo '<td>' . $entry['id_indikator'] . '</td>';
+        echo '<td>' . $entry['indikator_nama'] . '</td>';
+        echo '<td>' . $entry['id_target'] . '</td>';
+        echo '<td>' . $entry['id_realisasi_tw1'] . '</td>';
+        echo '<td>' . $entry['id_realisasi_tw2'] . '</td>';
+        echo '<td>' . $entry['id_realisasi_tw3'] . '</td>';
+        echo '<td>' . $entry['id_realisasi_tw4'] . '</td>';
+        echo '</tr>';
+    }
+
+    echo '</table>';
+    exit;
+}
+
+// Handle export request
+if (isset($_GET['export']) && $_GET['export'] === 'excel') {
+    $indicatorNumber = isset($_GET['indicator']) ? intval($_GET['indicator']) : 1;
+    switch ($indicatorNumber) {
+        case 1:
+            exportToExcel($data_indikator1, 'Sasaran_Strategis_1.xls');
+            break;
+        case 2:
+            exportToExcel($data_indikator2, 'Sasaran_Strategis_2.xls');
+            break;
+        case 3:
+            exportToExcel($data_indikator3, 'Sasaran_Strategis_3.xls');
+            break;
+        case 4:
+            exportToExcel($data_indikator4, 'Sasaran_Strategis_4.xls');
+            break;
+        case 5:
+            exportToExcel($data_indikator5, 'Sasaran_Strategis_5.xls');
+            break;
+        case 6:
+            exportToExcel($data_indikator6, 'Sasaran_Strategis_6.xls');
+            break;
+        default:
+            echo "Invalid indicator selected";
+            break;
     }
 }
 ?>
@@ -237,6 +314,9 @@ function renderTable($data, $tableId) {
                 rows[i].style.display = '';
             }
         }
+        function exportToExcel(indicatorNumber) {
+            window.location.href = '?export=excel&indicator=' + indicatorNumber;
+        }
     </script>
 </head>
 <body>
@@ -250,6 +330,14 @@ function renderTable($data, $tableId) {
     <button class="btn" onclick="showTable(4)">Sasaran Strategis 4</button>
     <button class="btn" onclick="showTable(5)">Sasaran Strategis 5</button>
     <button class="btn" onclick="showTable(6)">Sasaran Strategis 6</button>
+</div>
+<div class="btn-container">
+    <button class="btn" onclick="exportToExcel(1)">Export Sasaran Strategis 1 to Excel</button>
+    <button class="btn" onclick="exportToExcel(2)">Export Sasaran Strategis 2 to Excel</button>
+    <button class="btn" onclick="exportToExcel(3)">Export Sasaran Strategis 3 to Excel</button>
+    <button class="btn" onclick="exportToExcel(4)">Export Sasaran Strategis 4 to Excel</button>
+    <button class="btn" onclick="exportToExcel(5)">Export Sasaran Strategis 5 to Excel</button>
+    <button class="btn" onclick="exportToExcel(6)">Export Sasaran Strategis 6 to Excel</button>
 </div>
 <!-- Averages for each indicator -->
 <div class="averages-container hidden" id="averages1">
