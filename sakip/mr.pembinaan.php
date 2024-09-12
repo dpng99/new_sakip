@@ -83,6 +83,7 @@ $hasil1 = str_replace("_"," ","$satkernama1");
   <li> <a href="?g=aturapip&i=mr&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>"><span class="fa fa-trophy mr-3"></span>Atur APIP</a></li>
   <li> <a href="?g=aturprofile&i=mr&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>"><span class="fa fa-trophy mr-3"></span>Atur Profile</a></li>
   <li> <a href="?g=atursatker&i=mr&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>"><span class="fa fa-trophy mr-3"></span>Atur Satker</a></li>
+  <li><a href ="list_satker.php?session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>"><span class="fa fa-trophy mr-3"></span>Rekapitulasi Capaian Kinerja</a></li>
     </ul>
           </li>
          
@@ -101,7 +102,7 @@ $kep = $row2['id_simeryd'];
 if ($kep == "0") { echo  "";}
 elseif ($kep == "2") { print ('
  <li> <a href="?g=proses1&i=mr&session='.$session1.'&nama='.$nama1.'&idsatker='.$sid1.'"><span class="fa fa-trophy mr-3"></span>1. Perencanaan</a></li>
-      <li> <a href="?g=proses2&i=mr&session='.$session1.'&nama='.$nama1.'&idsatker='.$sid1.'"><span class="fa fa-trophy mr-3"></span>2. Pengukuran</a></li>
+<li> <a href="?g=proses2&i=mr&session='.$session1.'&nama='.$nama1.'&idsatker='.$sid1.'"><span class="fa fa-trophy mr-3"></span>2. Pengukuran</a></li>
  <li> <a href="?g=proses3&i=mr&session='.$session1.'&nama='.$nama1.'&idsatker='.$sid1.'"><span class="fa fa-trophy mr-3"></span>3. Pelaporan </a></li>
  <li> <a href="?g=proses4&i=mr&session='.$session1.'&nama='.$nama1.'&idsatker='.$sid1.'"><span class="fa fa-trophy mr-3"></span>4. Evaluasi </a></li>
 
@@ -141,6 +142,7 @@ elseif($g1 == "aturfile"){ include("mr.proses.1.aturfile.php"); }
 elseif($g1 == "aturinbox"){ include("mr.proses.1.aturinbox.php"); }
 elseif($g1 == "aturprofile"){ include("mr.proses.1.aturprofile.php"); }
 elseif($g1 == "atursatker"){ include("mr.proses.1.atursatker.php"); }
+elseif($g1 == "rekapitulasi"){ include("list_satker.php");}
 elseif($g1 == "inbox"){ include("$i1.inbox.php"); }
 elseif($g1 == "kepatuhan"){ include("$i1.kepatuhan.php"); }
 elseif($g1 == "proses1"){ include("$i1.proses.1.admin.php"); }

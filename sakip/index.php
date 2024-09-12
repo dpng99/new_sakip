@@ -33,7 +33,7 @@ $bg = array($pt.'bg_1.jpg', $pt.'bg_2.jpg', $pt.'bg_3.jpg' ); // array of filena
 <div class="container-contact100" style="background-image: url('<?php echo $bg[array_rand($bg)]; ?>');">
 
 		<div class="wrap-contact100"><center><?PHP echo $satker; ?><br><br><img src="themes/kejaksaan.png" width="150" height="165"><br><br>
-<form name="form1" method="post" action="index.auth.php">
+<form name="form1" method="POST" action="index.auth.php">
                   <table width="200" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td background="themes/camelon_b.jpg"><table width="100%"  border="0" align="center" cellpadding="4" cellspacing="4">

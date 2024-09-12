@@ -25,11 +25,7 @@ $satkernama1 = $row2['satkernama'];
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/style.css">
 <script language="javascript">
-/*
-Auto center window script- Eric King (http://redrival.com/eak/index.shtml)
-Permission granted to Dynamic Drive to feature script in archive
-For full source, usage terms, and 100's more DHTML scripts, visit http://dynamicdrive.com
-*/
+
 var win = null;
 function NewWindow(mypage,myname,w,h,scroll){
 LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
