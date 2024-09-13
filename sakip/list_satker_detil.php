@@ -22,6 +22,9 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
         mysqli_stmt_bind_result($stmt, $id_satker, $satkerkey);
 
         if (mysqli_stmt_fetch($stmt)) {
+            // We have fetched the results from the session query, so now we close the statement
+            mysqli_stmt_close($stmt);
+
             // Get id_satker from URL
             if (isset($_GET['id_satker'])) {
                 $id_satker_url = $_GET['id_satker'];
@@ -58,6 +61,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                     mysqli_stmt_bind_result($stmt_count, $total_records);
                     mysqli_stmt_fetch($stmt_count);
                     $total_pages = ceil($total_records / $records_per_page);
+                    mysqli_stmt_close($stmt_count); // Always close prepared statements after use
                     ?>
                     <!DOCTYPE html>
                     <html lang="en">
@@ -153,7 +157,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                     </html>
                     <?php
 
-                    mysqli_stmt_close($stmt_detil);
+                    mysqli_stmt_close($stmt_detil); // Close the detail statement once done
                 } else {
                     echo "Error preparing detail query: " . mysqli_error($link);
                 }
@@ -164,7 +168,6 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
             echo "Invalid session.";
         }
 
-        mysqli_stmt_close($stmt);
     } else {
         echo "Error preparing session validation query: " . mysqli_error($link);
     }
