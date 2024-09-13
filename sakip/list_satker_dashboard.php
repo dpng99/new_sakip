@@ -11,6 +11,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
     $session_id = $_SESSION['ID'];
     $session_pass = $_SESSION['Pass'];
 
+    // Mengecek apakah sesi valid
     $query = "SELECT id_satker, satkerkey FROM sinori_login WHERE id_satker = ? AND satkerkey = ?";
     $stmt = mysqli_prepare($link, $query);
     if ($stmt) {
@@ -22,9 +23,15 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
             if ($session_id == 'menpanrb' || $session_id == '888881') {
                 $db = mysqli_connect($server, $username, $password, $database);
 
+                // Query untuk mengambil data dengan LEFT JOIN
                 $query = "SELECT 
                         sl.id_satker, 
                         sl.satkernama,
+                        pk.id_approved,
+                        pk.id_otentikasi_tw1,
+                        pk.id_otentikasi_tw2,
+                        pk.id_otentikasi_tw3,
+                        pk.id_otentikasi_tw4,
                         kep.id_filesurat AS kep_filesurat,
                         renstra.id_satker AS renstra_satker,
                         renja.id_satker AS renja_satker,
@@ -32,39 +39,44 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                         iku.id_satker AS iku_satker,
                         dipa.id_satker AS dipa_satker,
                         renaksi.id_satker AS renaksi_satker,
-                        lkjip.id_satker AS lkjip_satker,
-                        COUNT(pk.id_satker) AS jumlah_capaian_kinerja
-                    FROM 
-                        sinori_login sl
-                    LEFT JOIN 
-                        sinori_sakip_keputusan kep ON sl.id_satker = kep.id_satker
-                    LEFT JOIN 
-                        sinori_sakip_renstra renstra ON sl.id_satker = renstra.id_satker
-                    LEFT JOIN 
-                        sinori_sakip_renja renja ON sl.id_satker = renja.id_satker
-                    LEFT JOIN 
-                        sinori_sakip_penetapan pk ON sl.id_satker = pk.id_satker
-                    LEFT JOIN 
-                        sinori_sakip_iku iku ON sl.id_satker = iku.id_satker
-                    LEFT JOIN 
-                        sinori_sakip_dipa dipa ON sl.id_satker = dipa.id_satker
-                    LEFT JOIN 
-                        sinori_sakip_renaksi renaksi ON sl.id_satker = renaksi.id_satker
-                    LEFT JOIN 
-                        sinori_sakip_lakip lkjip ON sl.id_satker = lkjip.id_satker
-                    WHERE 
-                        sl.id_hidesatker = '0'
-                    GROUP BY 
-                        sl.id_satker
-                    ORDER BY 
-                        sl.id_satker ASC";
+                        lkjip.id_satker AS lkjip_satker
+                    FROM sinori_login sl
+                    LEFT JOIN sinori_sakip_keputusan kep ON sl.id_satker = kep.id_satker
+                    LEFT JOIN sinori_sakip_renstra renstra ON sl.id_satker = renstra.id_satker
+                    LEFT JOIN sinori_sakip_renja renja ON sl.id_satker = renja.id_satker
+                    LEFT JOIN sinori_sakip_penetapan pk ON sl.id_satker = pk.id_satker
+                    LEFT JOIN sinori_sakip_iku iku ON sl.id_satker = iku.id_satker
+                    LEFT JOIN sinori_sakip_dipa dipa ON sl.id_satker = dipa.id_satker
+                    LEFT JOIN sinori_sakip_renaksi renaksi ON sl.id_satker = renaksi.id_satker
+                    LEFT JOIN sinori_sakip_lakip lkjip ON sl.id_satker = lkjip.id_satker
+                    WHERE sl.id_hidesatker = '0'
+                    GROUP BY sl.id_satker
+                    ORDER BY sl.id_satker ASC";
 
                 $result = mysqli_query($db, $query);
-
                 $data = [];
+
+                // Mengisi array data dengan status capaian kinerja
                 while ($row = mysqli_fetch_assoc($result)) {
+                    if($row['id_approved'] != "0"){
+                        if ($row['id_otentikasi_tw4'] != '0') {
+                            $status_capaian_kinerja = 'Sudah otentikasi sampai TW4';
+                        } elseif ($row['id_otentikasi_tw3'] != '0') {
+                            $status_capaian_kinerja = 'Sudah otentikasi sampai TW3';
+                        } elseif ($row['id_otentikasi_tw2'] != '0') {
+                            $status_capaian_kinerja = 'Sudah otentikasi sampai TW2';
+                        } elseif ($row['id_otentikasi_tw1'] != '0') {
+                            $status_capaian_kinerja = 'Sudah otentikasi sampai TW1';
+                        } else {
+                            $status_capaian_kinerja = 'PK sudah diapprove';
+                        }
+                    } else {
+                        $status_capaian_kinerja = 'Belum diapprove PK';
+                    }
+                    $row['status_capaian_kinerja'] = $status_capaian_kinerja;
                     $data[] = $row;
                 }
+
                 mysqli_free_result($result);
 ?>
 
@@ -78,6 +90,17 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
     <script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-light bg-warning-subtle mb-2 p-1 nav">
+    <div class="container">
+    <a class="navbar-brand">
+    
+    <img src="images/logo_kejaksaan.png" alt="Logo Kejaksaan RI" width="50" class="d-inline-block align-text-top"/>
+    Serenata AKIP Kejaksaan RI
+ 
+    </a>
+    <a class="nav-link btn-info active" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
+    </div>
+</nav>
     <div class="container">
         <h2 class="text-center mt-4">Data Rencana Kinerja Satuan Kerja Kejaksaan RI</h2>
 
@@ -107,7 +130,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                     <th class='text-center'>Renstra</th>
                     <th class='text-center'>Renja</th>
                     <th class='text-center'>Perjanjian Kinerja</th>
-                    <th class='text-center'>Jumlah Capaian Kinerja</th>
+                    <th class='text-center'>Status Capaian Kinerja</th>
                     <th class='text-center'>IKU</th>
                     <th class='text-center'>DPA</th>
                     <th class='text-center'>Ren Aksi</th>
@@ -149,7 +172,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                         <td class='text-center'>${row.renstra_satker ? `<a href='view.php?satker=${row.id_satker}&do=renstra' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
                         <td class='text-center'>${row.renja_satker ? `<a href='view.php?satker=${row.id_satker}&do=renja' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
                         <td class='text-center'>${row.pk_satker ? `<a href='view.php?satker=${row.id_satker}&do=pk' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
-                        <td class='text-center'><a href='view.php?satker=${row.id_satker}&do=capkin' target='_blank'>${row.jumlah_capaian_kinerja}</a></td>
+                        <td class='text-center'><a>${row.status_capaian_kinerja}</a></td>
                         <td class='text-center'>${row.iku_satker ? `<a href='view.php?satker=${row.id_satker}&do=iku' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
                         <td class='text-center'>${row.dipa_satker ? `<a href='view.php?satker=${row.id_satker}&do=dipa' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
                         <td class='text-center'>${row.renaksi_satker ? `<a href='view.php?satker=${row.id_satker}&do=renaksi' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>

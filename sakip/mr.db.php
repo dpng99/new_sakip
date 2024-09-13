@@ -1,10 +1,10 @@
 <?PHP
 //DATABASE JAKSa.iD
 $server = "localhost"; 
-$username = "root";
-$password = "";
+$username = "panevkejaksaan_prosakip";
+$password = "B,*3EnP]VIFH";
 $database = "panevkejaksaan_prosakip";
-
+$mytable  = "sinori_login";
 $mysqli = new mysqli("$server","$username","$password","$database");
 //$koneksi = mysqli_connect('localhost','root','','tutorial');
 //$mysqli = mysqli_connect("$server","$username","$password","$database");

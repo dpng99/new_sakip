@@ -964,6 +964,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
     <img src="images/logo_kejaksaan.png" alt="Logo Kejaksaan RI" width="50"/>
     Serenata AKIP Kejaksaan RI
     </a>
+    <a class="nav-link btn-info active" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Dashboard</a>
     <a class="nav-link btn-info active" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
     </div>
 </nav>
