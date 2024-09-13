@@ -882,6 +882,8 @@ $session1 = $_POST['session'];
 $capaian1 = $_POST['capaian'];
 $bidang1 = $_POST['bidang'];
 $narasi1 = $_POST['narasi'];
+$narasi2 = $_POST['narasi2'];
+$narasi3 = $_POST['narasi3'];
 $id1 = $_POST['id'];
 //$tanggal = $_POST["tanggal"];
 $error = "";
@@ -890,7 +892,7 @@ if ($capaian1 == ""){$error = "BOX ISIAN CAPAIAN TIDAK BOLEH KOSONG<BR>>";}
 if ($error == ""){
 include("mr.db.php");
 $link = mysqli_connect("$server","$username","$password","$database") or die(mysqli_error());
-$sql = "UPDATE sinori_sakip_penetapan Set id_realisasi_tw1 = '$capaian1', id_narasi_tw1 = '$narasi1' where id_satker = '$idsatker1' and id_bidang = '$bidang1' and id='$id1'";  
+$sql = "UPDATE sinori_sakip_penetapan Set id_realisasi_tw1 = '$capaian1', id_narasi_tw1 = '$narasi1', id_narasi_tw1_2 = '$narasi2', id_narasi_tw1_3 = '$narasi3' where id_satker = '$idsatker1' and id_bidang = '$bidang1' and id='$id1'";  
 if (mysqli_query($link, $sql)) {
       echo "INPUT CAPAIAN TRIWULAN 1 TELAH BERHASIL DISIMPAN SILAHKAN TUTUP JENDELA INI";
    } else {
@@ -907,6 +909,8 @@ $session1 = $_POST['session'];
 $capaian1 = $_POST['capaian'];
 $bidang1 = $_POST['bidang'];
 $narasi1 = $_POST['narasi'];
+$narasi2 = $_POST['narasi2'];
+$narasi3 = $_POST['narasi3'];
 $id1 = $_POST['id'];
 //$tanggal = $_POST["tanggal"];
 $error = "";
@@ -915,7 +919,7 @@ if ($capaian1 == ""){$error = "BOX ISIAN CAPAIAN TIDAK BOLEH KOSONG<BR>>";}
 if ($error == ""){
 include("mr.db.php");
 $link = mysqli_connect("$server","$username","$password","$database") or die(mysqli_error());
-$sql = "UPDATE sinori_sakip_penetapan Set id_realisasi_tw2 = '$capaian1', id_narasi_tw2 = '$narasi1' where id_satker = '$idsatker1' and id_bidang = '$bidang1' and id='$id1'";  
+$sql = "UPDATE sinori_sakip_penetapan Set id_realisasi_tw2 = '$capaian1', id_narasi_tw2 = '$narasi1', id_narasi_tw2_2 = '$narasi2', id_narasi_tw2_3 = '$narasi3' where id_satker = '$idsatker1' and id_bidang = '$bidang1' and id='$id1'";  
 if (mysqli_query($link, $sql)) {
       echo "INPUT CAPAIAN TRIWULAN 2 TELAH BERHASIL DISIMPAN SILAHKAN TUTUP JENDELA INI";
    } else {
@@ -932,6 +936,8 @@ $session1 = $_POST['session'];
 $capaian1 = $_POST['capaian'];
 $bidang1 = $_POST['bidang'];
 $narasi1 = $_POST['narasi'];
+$narasi2 = $_POST['narasi2'];
+$narasi3 = $_POST['narasi3'];
 $id1 = $_POST['id'];
 //$tanggal = $_POST["tanggal"];
 $error = "";
@@ -940,7 +946,7 @@ if ($capaian1 == ""){$error = "BOX ISIAN CAPAIAN TIDAK BOLEH KOSONG<BR>>";}
 if ($error == ""){
 include("mr.db.php");
 $link = mysqli_connect("$server","$username","$password","$database") or die(mysqli_error());
-$sql = "UPDATE sinori_sakip_penetapan Set id_realisasi_tw3 = '$capaian1', id_narasi_tw3 = '$narasi1' where id_satker = '$idsatker1' and id_bidang = '$bidang1' and id='$id1'";  
+$sql = "UPDATE sinori_sakip_penetapan Set id_realisasi_tw3 = '$capaian1', id_narasi_tw3 = '$narasi1', id_narasi_tw3_2 = '$narasi2', id_narasi_tw3_3 = '$narasi3' where id_satker = '$idsatker1' and id_bidang = '$bidang1' and id='$id1'";  
 if (mysqli_query($link, $sql)) {
       echo "INPUT CAPAIAN TRIWULAN 3 TELAH BERHASIL DISIMPAN SILAHKAN TUTUP JENDELA INI";
    } else {
@@ -957,6 +963,8 @@ $session1 = $_POST['session'];
 $capaian1 = $_POST['capaian'];
 $bidang1 = $_POST['bidang'];
 $narasi1 = $_POST['narasi'];
+$narasi2 = $_POST['narasi2'];
+$narasi3 = $_POST['narasi3'];
 $id1 = $_POST['id'];
 //$tanggal = $_POST["tanggal"];
 $error = "";
@@ -965,7 +973,7 @@ if ($capaian1 == ""){$error = "BOX ISIAN CAPAIAN TIDAK BOLEH KOSONG<BR>>";}
 if ($error == ""){
 include("mr.db.php");
 $link = mysqli_connect("$server","$username","$password","$database") or die(mysqli_error());
-$sql = "UPDATE sinori_sakip_penetapan Set id_realisasi_tw4 = '$capaian1', id_narasi_tw4 = '$narasi1' where id_satker = '$idsatker1' and id_bidang = '$bidang1' and id='$id1'";  
+$sql = "UPDATE sinori_sakip_penetapan Set id_realisasi_tw4 = '$capaian1', id_narasi_tw4 = '$narasi1', id_narasi_tw4_2 = '$narasi2', id_narasi_tw4_3 = '$narasi3' where id_satker = '$idsatker1' and id_bidang = '$bidang1' and id='$id1'";  
 if (mysqli_query($link, $sql)) {
       echo "INPUT CAPAIAN TRIWULAN 4 TELAH BERHASIL DISIMPAN SILAHKAN TUTUP JENDELA INI";
    } else {
