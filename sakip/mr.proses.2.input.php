@@ -134,24 +134,46 @@ print (''.$row2['indikator_nama'].'');
           <td>Hasil Capaian
             <div align="center"></div></td>
           <td>:</td>
-          <td><input name="capaian" type="text" id="capaian" value="" size="10">
+          <td><input name="capaian" type="text" id="capaian" value="" size="10" required>
             %<span class="style1"> </span></td>
           </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>Silahkan masukkan capaian Target Kinerja Anda hingga saat ini (Triwulan) <span class="style1">* Konversikan jumlah target dalam prosentase. contoh : target sejumlah 4 kegiatan/output adalah 100 : 4 = 25 sehingga hasilnya adalah 25% setiap kegiatan atau/output</span></td>
-        </tr>
-        <tr>
-          <td>Masukkan Narasi (Teks Cerita/Kronologis) capaian anda ini, Sampaikan hambatan maupun rencana optimalisasi melalui kotak ini </td>
-          <td>:</td>
-          <td><textarea name="narasi" rows="6" wrap="VIRTUAL" id="narasi"></textarea></td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td><input type="submit" name="Submit" value="Simpan"></td>
-        </tr>
+          <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>Silahkan masukkan capaian kinerja indikator tersebut hingga saat ini (Triwulan), <span class="style1">* sesuai dengan hasil perhitungan yang telah ditetapkan pada kolom formulasi di Perjanjian Kinerja.</span></td>
+          </tr>
+          <tr>
+              <td>Masukkan Uraian Capaian anda hingga saat ini (Triwulan)</td>
+              <td>:</td>
+              <td>
+                  <textarea name="narasi" rows="6" wrap="VIRTUAL" id="narasi" minlength="20" required></textarea>
+              </td>
+          </tr>
+          <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <tr>
+              <td>Masukkan Uraian Kendala/Hambatan anda hingga saat ini (Triwulan)</td>
+              <td>:</td>
+              <td>
+                  <textarea name="narasi2" rows="6" wrap="VIRTUAL" id="narasi2" minlength="20" required></textarea>
+              </td>
+          </tr>
+          <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <tr>
+              <td>Masukkan langkah strategi/optimalisasi kinerja anda untuk menangani Kendala/Hambatan saat ini (Triwulan)</td>
+              <td>:</td>
+              <td>
+                  <textarea name="narasi3" rows="6" wrap="VIRTUAL" id="narasi3" minlength="20" required></textarea>
+              </td>
+          </tr>
+          <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><input type="submit" name="Submit" value="Simpan"></td>
+          </tr>
       </table></td>
     </tr>
     <tr>
@@ -171,6 +193,41 @@ print (''.$row2['indikator_nama'].'');
     </tr>
   </table>
 </form>
+
+<!-- Minimal 20 char -->
+<script type="text/javascript">
+    document.getElementById('formID').onsubmit = function() {
+        var narasi = document.getElementById('narasi').value;
+        if (narasi.length < 20) {
+            alert("Minimal 20 karakter diperlukan untuk isian.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<script type="text/javascript">
+    document.getElementById('formID').onsubmit = function() {
+        var narasi2 = document.getElementById('narasi2').value;
+        if (narasi2.length < 20) {
+            alert("Minimal 20 karakter diperlukan untuk isian.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<script type="text/javascript">
+    document.getElementById('formID').onsubmit = function() {
+        var narasi3 = document.getElementById('narasi3').value;
+        if (narasi3.length < 20) {
+            alert("Minimal 20 karakter diperlukan untuk isian.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
           <?PHP
 }
 ?>

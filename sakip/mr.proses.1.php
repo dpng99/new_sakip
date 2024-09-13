@@ -441,7 +441,7 @@ print ('
 <td width="30%">Indikator</td>
 <td width="8%"><center>Target</center></td>
 <td width="5%"><center>Tipe</center></td>
-<td width="5%"><center>Aksi</center></td>
+<!--<td width="5%"><center>Aksi</center></td>-->
 </tr>
 </thead><tbody>
 ');
@@ -496,8 +496,9 @@ elseif ($tipe1 == "led") {
 print ('<center><img src="images/tipe_leading.png" width="60" height="20"></center>');
 } 
 //-----------
-echo"<td>
-<a href=\"mr.hapuspk.php?i=mr&idsatker=$idsatker1&id=$id1&idbidang=$bidang1&session=$session1\" onclick=\"NewWindow(this.href,'mywin','600','250','yes','center');return false\" onfocus=\"this.blur()\"><img src=\"images/tipe_hapus.png\" width=\"60\" height=\"20\"></a></center></td>";
+//aksi
+// echo"<td>
+// <a href=\"mr.hapuspk.php?i=mr&idsatker=$idsatker1&id=$id1&idbidang=$bidang1&session=$session1\" onclick=\"NewWindow(this.href,'mywin','600','250','yes','center');return false\" onfocus=\"this.blur()\"><img src=\"images/tipe_hapus.png\" width=\"60\" height=\"20\"></a></center></td>";
 
 
 

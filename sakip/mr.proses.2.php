@@ -57,7 +57,9 @@ print ('
 <td width="25%">Indikator</td>
 <td width="6%"><center>Target</center></td>
 <td width="6%"><center>Realisasi TW1</center></td>
-<td width="13%"><center>Narasi TW1, HRO</center></td>
+<td width="10%"><center>Capaian Kinerja TW1</center></td>
+<td width="10%"><center>Kendala dan Hambatan TW1</center></td>
+<td width="10%"><center>Langkah Strategi/Optimalisasi TW1</center></td>
 <td width="6%"><center>Tipe</center></td>
 
 
@@ -133,6 +135,8 @@ print ('</td>');
 
 //-------narasi
 print ('<td>'.$ar['id_narasi_tw1'].'</td>');
+print ('<td>'.$ar['id_narasi_tw1_2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw1_3'].'</td>');
 //----------------------------
 print ('<td>');
  if ($tipe1  == "lag") {
@@ -157,7 +161,16 @@ print ('<table width="100%"  border="0" cellspacing="2" cellpadding="2">
 ?>
 <br>
 Tetapkan validasi bahwa isian diatas telah benar dengan langkah otentikasi klik link berikut  Tidak ada upaya revisi setelah di Otentikasi. Terhadap Capaian Kinerja yang tidak diotentikasi maka tidak akan dilakukan reviu dan tidak menjadi bagian penilaian kinerja. Pastikan anda telah menyelesaikan seluruh Perjanjian kinerja yang ada dan menyatakan capaian masing-masing untuk di verifikasi/audit. Hanya capaian kinerja yang telah divalidasi dan di audit dapat mengikuti tahapan capaian kinerja selanjutnya.<br><br>
+<!--//menampilkan tombol otentikasi-->
+<?PHP
+$res = mysqli_query($link, "SELECT * FROM sinori_sakip_penetapan where id_satker = '$idsatker1' and id_tahun = '2024' and id_target !='' and id_approved = '1' and id_hide !='1' ORDER by id_otentikasi_tw1 LIMIT 1");
+$arr=mysqli_fetch_array($res,MYSQLI_ASSOC);
+
+if ($arr['id_otentikasi_tw1'] == "0") { ?>
 <div align="right"><a href="mr.validasi.kinerja.php?step=tw1&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>" onclick="NewWindow(this.href,'mywin','1000','600','yes','center');return false" onfocus="this.blur()"><img src="images/otentikasi.png" width="168" height="44"></a></div><br>
+<?PHP } ?>
+
+<br>
 </p>
     
   </div>
@@ -196,9 +209,10 @@ print ('
 <td width="20%">Indikator</td>
 <td width="6%"><center>Target</center></td>
 <td width="6%"><center>Realisasi TW1</center></td>
-<td width="7%"><center>Narasi TW1, HRO</center></td>
 <td width="6%"><center>Realisasi TW2</center></td>
-<td width="7%"><center>Narasi TW2, HRO</center></td>
+<td width="10%"><center>Capaian Kinerja TW2</center></td>
+<td width="10%"><center>Kendala dan Hambatan TW2</center></td>
+<td width="10%"><center>Langkah Strategi/Optimalisasi TW2</center></td>
 <td width="6%"><center>Tipe</center></td>
 </tr>
 </thead><tbody>
@@ -246,7 +260,7 @@ print ('<td>'.$row2['indikator_nama'].'</td>');
 
 print ('<td><center><b>'.$ar['id_target'].'</b></center></td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw1'].'</b></center></td>');
-print ('<td>'.$ar['id_narasi_tw1'].'</td>');
+// print ('<td>'.$ar['id_narasi_tw1'].'</td>');
 //-------------------------capaian start
 print ('<td>');
 if ($ar['id_realisasi_tw2'] == "" && $ar['id_otentikasi_tw2'] == "0") {
@@ -273,6 +287,8 @@ print ('</td>');
 
 //-------narasi
 print ('<td>'.$ar['id_narasi_tw2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw2_2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw2_3'].'</td>');
 //----------------------------
 print ('<td>');
  if ($tipe1  == "lag") {
@@ -297,7 +313,16 @@ print ('<table width="100%"  border="0" cellspacing="2" cellpadding="2">
 ?>
 <br>
 Tetapkan validasi bahwa isian diatas telah benar dengan langkah otentikasi klik link berikut  Tidak ada upaya revisi setelah di Otentikasi. Terhadap Capaian Kinerja yang tidak diotentikasi maka tidak akan dilakukan reviu dan tidak menjadi bagian penilaian kinerja. Pastikan anda telah menyelesaikan seluruh Perjanjian kinerja yang ada dan menyatakan capaian masing-masing untuk di verifikasi/audit. Hanya capaian kinerja yang telah divalidasi dan di audit dapat mengikuti tahapan capaian kinerja selanjutnya.<br><br>
-<div align="right"><a href="mr.validasi.kinerja.php?step=tw2&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>" onclick="NewWindow(this.href,'mywin','1000','600','yes','center');return false" onfocus="this.blur()"><img src="images/otentikasi.png" width="168" height="44"></a></div><br></p> 
+<!--//menampilkan tombol otentikasi-->
+<?PHP
+$res = mysqli_query($link, "SELECT * FROM sinori_sakip_penetapan where id_satker = '$idsatker1' and id_tahun = '2024' and id_target !='' and id_approved = '1' and id_hide !='1' ORDER by id_otentikasi_tw2 LIMIT 1");
+$arr=mysqli_fetch_array($res,MYSQLI_ASSOC);
+
+if ($arr['id_otentikasi_tw2'] == "0") { ?>
+<div align="right"><a href="mr.validasi.kinerja.php?step=tw2&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>" onclick="NewWindow(this.href,'mywin','1000','600','yes','center');return false" onfocus="this.blur()"><img src="images/otentikasi.png" width="168" height="44"></a></div><br>
+<?PHP } ?>
+
+<br></p> 
   </div>
 
   <div id="TW3" class="w3-container city" style="display:none">
@@ -334,11 +359,11 @@ print ('
 <td width="15%">Indikator</td>
 <td width="6%"><center>Target</center></td>
 <td width="6%"><center>Realisasi TW1</center></td>
-<td width="7%"><center>Narasi TW1, HRO</center></td>
 <td width="6%"><center>Realisasi TW2</center></td>
-<td width="7%"><center>Narasi TW2, HRO</center></td>
 <td width="6%"><center>Realisasi TW3</center></td>
-<td width="7%"><center>Narasi TW3, HRO</center></td>
+<td width="10%"><center>Capaian Kinerja TW3</center></td>
+<td width="10%"><center>Kendala dan Hambatan TW3</center></td>
+<td width="10%"><center>Langkah Strategi/Optimalisasi TW3</center></td>
 <td width="6%"><center>Tipe</center></td>
 </tr>
 </thead><tbody>
@@ -386,9 +411,7 @@ print ('<td>'.$row2['indikator_nama'].'</td>');
 
 print ('<td><center><b>'.$ar['id_target'].'</b></center></td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw1'].'</b></center></td>');
-print ('<td>'.$ar['id_narasi_tw1'].'</td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw2'].'</b></center></td>');
-print ('<td>'.$ar['id_narasi_tw2'].'</td>');
 //-------------------------capaian start
 print ('<td>');
 if ($ar['id_realisasi_tw3'] == "" && $ar['id_otentikasi_tw3'] == "0") {
@@ -415,6 +438,8 @@ print ('</td>');
 
 //-------narasi
 print ('<td>'.$ar['id_narasi_tw3'].'</td>');
+print ('<td>'.$ar['id_narasi_tw3_2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw3_3'].'</td>');
 //----------------------------
 print ('<td>');
  if ($tipe1  == "lag") {
@@ -439,7 +464,16 @@ print ('<table width="100%"  border="0" cellspacing="2" cellpadding="2">
 ?>
 <br>
 Tetapkan validasi bahwa isian diatas telah benar dengan langkah otentikasi klik link berikut  Tidak ada upaya revisi setelah di Otentikasi. Terhadap Capaian Kinerja yang tidak diotentikasi maka tidak akan dilakukan reviu dan tidak menjadi bagian penilaian kinerja. Pastikan anda telah menyelesaikan seluruh Perjanjian kinerja yang ada dan menyatakan capaian masing-masing untuk di verifikasi/audit. Hanya capaian kinerja yang telah divalidasi dan di audit dapat mengikuti tahapan capaian kinerja selanjutnya.<br><br>
-<div align="right"><a href="mr.validasi.kinerja.php?step=tw3&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>" onclick="NewWindow(this.href,'mywin','1000','600','yes','center');return false" onfocus="this.blur()"><img src="images/otentikasi.png" width="168" height="44"></a></div><br></p> </p>
+<!--//menampilkan tombol otentikasi-->
+<?PHP
+$res = mysqli_query($link, "SELECT * FROM sinori_sakip_penetapan where id_satker = '$idsatker1' and id_tahun = '2024' and id_target !='' and id_approved = '1' and id_hide !='1' ORDER by id_otentikasi_tw3 LIMIT 1");
+$arr=mysqli_fetch_array($res,MYSQLI_ASSOC);
+
+if ($arr['id_otentikasi_tw3'] == "0") { ?>
+<div align="right"><a href="mr.validasi.kinerja.php?step=tw3&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>" onclick="NewWindow(this.href,'mywin','1000','600','yes','center');return false" onfocus="this.blur()"><img src="images/otentikasi.png" width="168" height="44"></a></div><br>
+<?PHP } ?>
+
+<br></p> </p>
   </div>
       <div id="TW4" class="w3-container city" style="display:none">
     <h2>Periode Oktober - November (TW 4)</h2>
@@ -475,13 +509,12 @@ print ('
 <td width="10%">Indikator</td>
 <td width="6%"><center>Target</center></td>
 <td width="6%"><center>Realisasi TW1</center></td>
-<td width="7%"><center>Narasi TW1, HRO</center></td>
 <td width="6%"><center>Realisasi TW2</center></td>
-<td width="7%"><center>Narasi TW2, HRO</center></td>
 <td width="6%"><center>Realisasi TW3</center></td>
-<td width="7%"><center>Narasi TW3, HRO</center></td>
 <td width="6%"><center>Realisasi TW4</center></td>
-<td width="7%"><center>Narasi TW4, HRO</center></td>
+<td width="10%"><center>Capaian Kinerja TW4</center></td>
+<td width="10%"><center>Kendala dan Hambatan TW4</center></td>
+<td width="10%"><center>Langkah Strategi/Optimalisasi TW4</center></td>
 <td width="6%"><center>Tipe</center></td>
 </tr>
 </thead><tbody>
@@ -529,11 +562,8 @@ print ('<td>'.$row2['indikator_nama'].'</td>');
 
 print ('<td><center><b>'.$ar['id_target'].'</b></center></td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw1'].'</b></center></td>');
-print ('<td>'.$ar['id_narasi_tw1'].'</td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw2'].'</b></center></td>');
-print ('<td>'.$ar['id_narasi_tw2'].'</td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw3'].'</b></center></td>');
-print ('<td>'.$ar['id_narasi_tw3'].'</td>');
 //-------------------------capaian start
 print ('<td>');
 if ($ar['id_realisasi_tw4'] == "" && $ar['id_otentikasi_tw4'] == "0") {
@@ -560,6 +590,9 @@ print ('</td>');
 
 //-------narasi
 print ('<td>'.$ar['id_narasi_tw4'].'</td>');
+print ('<td>'.$ar['id_narasi_tw4_2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw4_3'].'</td>');
+
 //----------------------------
 print ('<td>');
  if ($tipe1  == "lag") {
@@ -584,7 +617,15 @@ print ('<table width="100%"  border="0" cellspacing="2" cellpadding="2">
 ?>
 <br>
 Tetapkan validasi bahwa isian diatas telah benar dengan langkah otentikasi klik link berikut  Tidak ada upaya revisi setelah di Otentikasi. Terhadap Capaian Kinerja yang tidak diotentikasi maka tidak akan dilakukan reviu dan tidak menjadi bagian penilaian kinerja. Pastikan anda telah menyelesaikan seluruh Perjanjian kinerja yang ada dan menyatakan capaian masing-masing untuk di verifikasi/audit. Hanya capaian kinerja yang telah divalidasi dan di audit dapat mengikuti tahapan capaian kinerja selanjutnya.<br><br>
-<div align="right"><a href="mr.validasi.kinerja.php?step=tw4&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>" onclick="NewWindow(this.href,'mywin','1000','600','yes','center');return false" onfocus="this.blur()"><img src="images/otentikasi.png" width="168" height="44"></a></div><br></p>
+<!--//menampilkan tombol otentikasi-->
+<?PHP
+$res = mysqli_query($link, "SELECT * FROM sinori_sakip_penetapan where id_satker = '$idsatker1' and id_tahun = '2024' and id_target !='' and id_approved = '1' and id_hide !='1' ORDER by id_otentikasi_tw4 LIMIT 1");
+$arr=mysqli_fetch_array($res,MYSQLI_ASSOC);
+
+if ($arr['id_otentikasi_tw4'] == "0") { ?>
+<div align="right"><a href="mr.validasi.kinerja.php?step=tw4&session=<?PHP echo $session1; ?>&nama=<?PHP echo $nama1; ?>&idsatker=<?PHP echo $sid1; ?>" onclick="NewWindow(this.href,'mywin','1000','600','yes','center');return false" onfocus="this.blur()"><img src="images/otentikasi.png" width="168" height="44"></a></div><br>
+<?PHP } ?>
+<br></p>
   </div>
        <div id="APIP" class="w3-container city" style="display:none">
     <h2>VERIFIKASI APIP CAPAIAN KINERJA SATKER ANDA</h2>
