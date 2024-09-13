@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("mr.db.php");
+
 $records_per_page = 10; // Define how many records to show per page
 if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
     $link = mysqli_connect($server, $username, $password, $database);
@@ -28,9 +29,10 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 $offset = ($page - 1) * $records_per_page;
                 // Query to fetch detail from the id_satker with limit for pagination
-                $query = "SELECT sl.id_satker, sl.satkernama, pk.id_approved, pk.id_otentikasi_tw1, 
-                                 pk.id_otentikasi_tw2, pk.id_otentikasi_tw3, pk.id_otentikasi_tw4, pk.id_realisasi_tw1,pk.id_realisasi_tw2,pk.id_realisasi_tw3,pk.id_realisasi_tw4, 
-                                 sb.bidang_nama, sp.saspro_nama, ik.indikator_nama
+                $query = "SELECT sl.id_satker, sl.satkernama, pk.id_approved, pk.id_otentikasi_tw1,
+                                pk.id_otentikasi_tw2, pk.id_otentikasi_tw3, pk.id_otentikasi_tw4,
+                                pk.id_realisasi_tw1, pk.id_realisasi_tw2, pk.id_realisasi_tw3, pk.id_realisasi_tw4, 
+                                sb.bidang_nama, sp.saspro_nama, ik.indikator_nama
                           FROM sinori_login sl
                           LEFT JOIN sinori_sakip_penetapan pk ON sl.id_satker = pk.id_satker
                           LEFT JOIN sinori_sakip_bidang sb ON pk.id_bidang = sb.id
