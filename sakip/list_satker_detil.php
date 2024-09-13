@@ -29,7 +29,8 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                 $offset = ($page - 1) * $records_per_page;
                 // Query to fetch detail from the id_satker with limit for pagination
                 $query = "SELECT sl.id_satker, sl.satkernama, pk.id_approved, pk.id_otentikasi_tw1, 
-                                 pk.id_otentikasi_tw2, pk.id_otentikasi_tw3, pk.id_otentikasi_tw4, 
+                                 pk.id_otentikasi_tw2, pk.id_otentikasi_tw3, pk.id_otentikasi_tw4,
+                                 , pk.id_realisasi_tw1,pk.id_realisasi_tw2,pk.id_realisasi_tw3,pk.id_realisasi_tw4, 
                                  sb.bidang_nama, sp.saspro_nama, ik.indikator_nama
                           FROM sinori_login sl
                           LEFT JOIN sinori_sakip_penetapan pk ON sl.id_satker = pk.id_satker
@@ -43,7 +44,8 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                     mysqli_stmt_bind_param($stmt_detil, "sii", $id_satker_url, $offset, $records_per_page);
                     mysqli_stmt_execute($stmt_detil);
                     mysqli_stmt_bind_result($stmt_detil, $id_satker, $satkernama, $id_approved, 
-                        $id_otentikasi_tw1, $id_otentikasi_tw2, $id_otentikasi_tw3, $id_otentikasi_tw4, 
+                        $id_otentikasi_tw1, $id_otentikasi_tw2, $id_otentikasi_tw3, $id_otentikasi_tw4, $id_realisasi_tw1,
+                        $id_realisasi_tw2, $id_realisasi_tw3, $id_realisasi_tw4,
                         $bidang_nama, $saspro_nama, $indikator_nama);
                     // Query to get total records for pagination
                     $query_count = "SELECT COUNT(*) as total FROM sinori_login sl WHERE sl.id_satker = ?";
@@ -103,10 +105,10 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                                 <th>Sasaran Program</th>
                                 <th>Indikator</th>
                                 <th>Status PK Approved</th>
-                                <th>Status Otentikasi TW1</th>
-                                <th>Status Otentikasi TW2</th>
-                                <th>Status Otentikasi TW3</th>
-                                <th>Status Otentikasi TW4</th>
+                                <th>Status Realisasi TW1</th>
+                                <th>Status Realisasi TW2</th>
+                                <th>Status Realisasi TW3</th>
+                                <th>Status Realisasi TW4</th>
                             </tr>
                             <?php
                             do {
@@ -114,11 +116,10 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                                 echo "<td>" . htmlspecialchars($bidang_nama) . "</td>";
                                 echo "<td>" . htmlspecialchars($saspro_nama) . "</td>";
                                 echo "<td>" . htmlspecialchars($indikator_nama) . "</td>";
-                                echo "<td>" . ($id_approved ? 'Approved' : 'Belum Approved') . "</td>";
-                                echo "<td>" . ($id_otentikasi_tw1 ? 'Otentikasi Selesai' : 'Belum Otentikasi') . "</td>";
-                                echo "<td>" . ($id_otentikasi_tw2 ? 'Otentikasi Selesai' : 'Belum Otentikasi') . "</td>";
-                                echo "<td>" . ($id_otentikasi_tw3 ? 'Otentikasi Selesai' : 'Belum Otentikasi') . "</td>";
-                                echo "<td>" . ($id_otentikasi_tw4 ? 'Otentikasi Selesai' : 'Belum Otentikasi') . "</td>";
+                                echo "<td>" . htmlspecialchars($id_realisasi_tw1) . "</td>";
+                                echo "<td>" . htmlspecialchars($id_realisasi_tw2) . "</td>";
+                                echo "<td>" . htmlspecialchars($id_realisasi_tw3) . "</td>";
+                                echo "<td>" . htmlspecialchars($id_realisasi_tw4) . "</td>";
                                 echo "</tr>";
                             } while (mysqli_stmt_fetch($stmt_detil));
                             ?>
