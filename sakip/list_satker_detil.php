@@ -50,28 +50,30 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                     <!DOCTYPE html>
                     <html lang="en">
                     <head>
+                    <link href="css/bootstrap.min.css" rel="stylesheet">
+                    <script src = "js/bootstrap.bundle.min.js"> </script>
                         <meta charset="UTF-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                         <title>Detail Satker</title>
-                        <style>
-                            table {
-                                border-collapse: collapse;
-                                width: 100%;
-                            }
-                            table, th, td {
-                                border: 1px solid black;
-                                padding: 8px;
-                                text-align: left;
-                            }
-                            th {
-                                background-color: #f2f2f2;
-                            }
-                        </style>
+                        
                     </head>
                     <body>
+                    <nav class="navbar navbar-light bg-warning-subtle mb-2 p-1 nav">
+    <div class="container">
+    <a class="navbar-brand">
+    
+    <img src="images/logo_kejaksaan.png" alt="Logo Kejaksaan RI" width="50" class="d-inline-block align-text-top"/>
+    Serenata AKIP Kejaksaan RI
+ 
+    </a>
+    <a class="nav-link btn-info active" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
+    </div>
+</nav>
+<div class='container m-2 p-3'>
+
                     <?php if (mysqli_stmt_fetch($stmt_detil)): ?>
-                        <h1>Detail Satker</h1>
-                        <table>
+                        <h1 class='text-center'>Detail Satker</h1>
+                        <table class='table table-bordered table'>
                             <tr>
                                 <th>Bidang</th>
                                 <th>Sasaran Program</th>
@@ -85,14 +87,14 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                             <?php
                             do {
                                 echo "<tr>";
-                                echo "<td>" . htmlspecialchars($bidang_nama) . "</td>";
-                                echo "<td>" . htmlspecialchars($saspro_nama) . "</td>";
-                                echo "<td>" . htmlspecialchars($indikator_nama) . "</td>";
-                                echo "<td>" . htmlspecialchars($id_target) . "</td>";
-                                echo "<td>" . htmlspecialchars($id_realisasi_tw1) . "</td>";
-                                echo "<td>" . htmlspecialchars($id_realisasi_tw2) . "</td>";
-                                echo "<td>" . htmlspecialchars($id_realisasi_tw3) . "</td>";
-                                echo "<td>" . htmlspecialchars($id_realisasi_tw4) . "</td>";
+                                echo "<td class = 'text-center'>" . htmlspecialchars($bidang_nama) . "</td>";
+                                echo "<td class = 'text-center'>" . htmlspecialchars($saspro_nama) . "</td>";
+                                echo "<td class = 'text-center'>" . htmlspecialchars($indikator_nama) . "</td>";
+                                echo "<td class = 'text-center'>" . htmlspecialchars($id_target) . "</td>";
+                                echo "<td class = 'text-center'>" . htmlspecialchars($id_realisasi_tw1) . "</td>";
+                                echo "<td class = 'text-center'>" . htmlspecialchars($id_realisasi_tw2) . "</td>";
+                                echo "<td class = 'text-center'>" . htmlspecialchars($id_realisasi_tw3) . "</td>";
+                                echo "<td class = 'text-center'>" . htmlspecialchars($id_realisasi_tw4) . "</td>";
                                 echo "</tr>";
                             } while (mysqli_stmt_fetch($stmt_detil));
                             ?>
@@ -100,6 +102,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                     <?php else: ?>
                         <p>No records found for Satker ID: <?php echo htmlspecialchars($id_satker_url); ?></p>
                     <?php endif; ?>
+                    </div>
                     </body>
                     </html>
                     <?php

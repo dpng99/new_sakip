@@ -711,9 +711,9 @@ function renderTable($data, $tableId) {
                     $realisasitw4 = (float) $row['id_realisasi_tw4'];
             // Perhitungan verifikasi pencapaian
             $tw1 = isset($realisasitw1) ? $realisasitw1 : 0;
-            $tw2 = isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
-            $tw3 = isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
-            $tw4 = isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
+            $tw2 = isset($realisasitw2) ? $realisasitw2 : 0;
+            $tw3 = isset($realisasitw3) ? $realisasitw3 : 0;
+            $tw4 = isset($realisasitw4) ? $realisasitw4 : 0;
             $target = isset($row['id_target']) ? $row['id_target'] : 0;
 
             $latestTW = max($tw1, $tw2, $tw3, $tw4);
