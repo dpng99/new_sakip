@@ -37,7 +37,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                           LEFT JOIN sinori_sakip_bidang sb ON pk.id_bidang = sb.id
                           LEFT JOIN sinori_sakip_saspro sp ON pk.id_saspro = sp.id
                           LEFT JOIN sinori_sakip_indikator ik ON pk.id_indikator = ik.id
-                          WHERE sl.id_satker = ?
+                          WHERE sl.id_satker = $id_satker_url
                           LIMIT ? OFFSET ?";
 
                 $stmt_detil = mysqli_prepare($link, $query);
