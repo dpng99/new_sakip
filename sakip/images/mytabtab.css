@@ -1,0 +1,61 @@
+/* ######### CSS for Indented CSS Tabs. Remove if not using ######### */
+.slidemenu{
+font: bold 11px verdana;
+margin-bottom:10px;
+}
+.slidemenu ul{
+margin: 0;
+padding: 0;
+float: left;
+}
+.slidemenu ul li{
+display: inline;
+}
+.slidemenu ul li a{
+float: left;    
+margin-right: 2px; 
+padding-top: 0pt;  
+padding-right: 5px;  
+padding-bottom: 0pt;   
+padding-left: 5px;   
+font-family: arial;   
+font-style: normal;   
+font-variant: normal;  
+font-weight: normal;   
+font-size: 12px;     
+line-height: normal;  
+text-decoration: none;  
+color: #000000;      
+background-color: #FFCC00;
+}
+
+.slidemenu ul li a:visited {
+color: #999999;
+}
+
+.slidemenu ul li a:hover {
+background: #CCC;
+}
+
+
+.slidemenu ul li a.selected {
+color: #000000;   
+background-color: #FFFFFF;  
+}     
+
+.tabcontentstyle{ 
+width: 350px;
+margin-bottom: 1em;
+padding: 10px;
+}
+
+.tabcontent{
+display:none;
+}
+
+@media print {
+.tabcontent {
+display:block !important;
+}
+}
+ 

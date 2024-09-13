@@ -26,8 +26,10 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
             // Verifikasi sukses, pastikan hanya menpanrb yang dapat mengakses
             if ($session_id == 'menpanrb' || $session_id == '888881') {
                 // Session valid dan user adalah menpanrb, tampilkan halaman
+                
                 $user = $_SESSION['ID'];
-                echo "<h1>Welcome $user</h1>";
+                
+               
 
                 // Lakukan koneksi dan query yang relevan untuk menampilkan data
                 $db = mysqli_connect($server, $username, $password, $database);
@@ -73,14 +75,14 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                         $data_indikator1[] = $hasil1;
                     } elseif (in_array($hasil1['id_indikator'], array(7, 9, 39, 68, 71, 91))) {
                         $data_indikator6[] = $hasil1;
-                    }
+                    }elseif (in_array($hasil1['id_indikator'], array(53 /* ,60, 78, 79 */))) {
+                        $data_indikator2_part1[] = $hasil1;
+                    } 
 
                 } elseif ($hasil1['id_sakip_level'] == '2') {
-                    if (in_array($hasil1['id_indikator'], array(6, 8, 10, 53, 54, 55, 60, 61, 62, 69, 70, 72, 77, 78, 79, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92))) {
+                    if (in_array($hasil1['id_indikator'], array(6, 8, 10, 54, 55, 61, 62, 69, 70, 72, 77, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92))) {
                         $data_indikator2[] = $hasil1;
-                        if (in_array($hasil1['id_indikator'], array(60, 78, 79))) {
-                            $data_indikator2_part1[] = $hasil1;
-                        } elseif (in_array($hasil1['id_indikator'], array(6, 8, 10, 53, 54, 61, 69, 70, 72, 77, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92))) {
+                        if (in_array($hasil1['id_indikator'], array(6, 8, 10, 53, 54, 61, 69, 70, 72, 77, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92))) {
                             $data_indikator2_part2[] = $hasil1;
                         } elseif (in_array($hasil1['id_indikator'], array(55, 62, 80))) {
                             $data_indikator2_part3[] = $hasil1;
@@ -114,22 +116,26 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                 $count = 0;
 
                 foreach ($data as $row) {
-                    if ((isset($row['id_realisasi_tw1']) && $row['id_realisasi_tw1'] == 0) && 
-                        (isset($row['id_realisasi_tw2']) && $row['id_realisasi_tw2'] == 0) && 
-                        (isset($row['id_realisasi_tw3']) && $row['id_realisasi_tw3'] == 0) && 
-                        (isset($row['id_realisasi_tw4']) && $row['id_realisasi_tw4'] == 0)) {
-                        continue;  // Skip this row
-                    }
+                    $realisasitw1 = (float) $row['id_realisasi_tw1'];
+                    $realisasitw2 = (float) $row['id_realisasi_tw2'];
+                    $realisasitw3 = (float) $row['id_realisasi_tw3'];
+                    $realisasitw4 = (float) $row['id_realisasi_tw4'];
+                    if ((isset($realisasitw1) && $realisasitw1 == 0) && 
+                    (isset($realisasitw2) && $realisasitw2== 0) && 
+                     (isset($realisasitw3) && $realisasitw3== 0) && 
+                     (isset($realisasitw4) && $realisasitw4== 0)) {
+                     continue;  // Skip this row
+                 }
 
-                    $tw1_sum += isset($row['id_realisasi_tw1']) ? $row['id_realisasi_tw1'] : 0;
-                    $tw2_sum += isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
-                    $tw3_sum += isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
-                    $tw4_sum += isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
+                 // Sum up the values for the non-zero rows
+                 $tw1_sum += isset($realisasitw1) ? $realisasitw1 : 0;
+                 $tw2_sum += isset($realisasitw2) ? $realisasitw2 : 0;
+                 $tw3_sum += isset($realisasitw3) ? $realisasitw3: 0;
+                 $tw4_sum += isset($realisasitw4) ? $realisasitw4 : 0;
 
-                    $count++;
-                }
-
-                return array(
+                 // Increment the count for valid rows
+                 $count++;
+             }                return array(
                     'tw1_avg' => $count > 0 ? $tw1_sum / $count : 0,
                     'tw2_avg' => $count > 0 ? $tw2_sum / $count : 0,
                     'tw3_avg' => $count > 0 ? $tw3_sum / $count : 0,
@@ -141,30 +147,34 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
             function computeAverages($data) {
                 $tw1_sum = $tw2_sum = $tw3_sum = $tw4_sum = 0;
                 $count = 0;
-
+                
                 foreach ($data as $row) {
+                    $realisasitw1 = (float) $row['id_realisasi_tw1'];
+                    $realisasitw2 = (float) $row['id_realisasi_tw2'];
+                    $realisasitw3 = (float) $row['id_realisasi_tw3'];
+                    $realisasitw4 = (float) $row['id_realisasi_tw4'];
                     // Check if all TW values are 0
-                    if ((isset($row['id_realisasi_tw1']) && $row['id_realisasi_tw1'] == 0) && 
-                        (isset($row['id_realisasi_tw2']) && $row['id_realisasi_tw2'] == 0) && 
-                        (isset($row['id_realisasi_tw3']) && $row['id_realisasi_tw3'] == 0) && 
-                        (isset($row['id_realisasi_tw4']) && $row['id_realisasi_tw4'] == 0)) {
+                    if ((isset($realisasitw1) && $realisasitw1 == 0) && 
+                       (isset($realisasitw2) && $realisasitw2== 0) && 
+                        (isset($realisasitw3) && $realisasitw3== 0) && 
+                        (isset($realisasitw4) && $realisasitw4== 0)) {
                         continue;  // Skip this row
                     }
 
                     // Sum up the values for the non-zero rows
-                    $tw1_sum += isset($row['id_realisasi_tw1']) ? $row['id_realisasi_tw1'] : 0;
-                    $tw2_sum += isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
-                    $tw3_sum += isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
-                    $tw4_sum += isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
+                    $tw1_sum += isset($realisasitw1) ? $realisasitw1 : 0;
+                    $tw2_sum += isset($realisasitw2) ? $realisasitw2 : 0;
+                    $tw3_sum += isset($realisasitw3) ? $realisasitw3: 0;
+                    $tw4_sum += isset($realisasitw4) ? $realisasitw4 : 0;
 
                     // Increment the count for valid rows
                     $count++;
                 }
 
-                $tw1_avg = $count > 0 ? (($tw1_sum / $count) / 90) * 100 : 0;
-                $tw2_avg = $count > 0 ? (($tw2_sum / $count) / 90) * 100 : 0;
-                $tw3_avg = $count > 0 ? (($tw3_sum / $count) / 90) * 100 : 0;
-                $tw4_avg = $count > 0 ? (($tw4_sum / $count) / 90) * 100 : 0;
+                $tw1_avg = $count > 0 ? ($tw1_sum / $count) : 0;
+                $tw2_avg = $count > 0 ? ($tw2_sum / $count) : 0;
+                $tw3_avg = $count > 0 ? ($tw3_sum / $count) : 0;
+                $tw4_avg = $count > 0 ? ($tw4_sum / $count) : 0;
 
                 return array(
                     'tw1_avg' => $tw1_avg,
@@ -182,27 +192,30 @@ function computeAverages2($data) {
     $count = 0;
 
     foreach ($data as $row) {
-        // Check if all TW values are 0
-        if ((isset($row['id_realisasi_tw1']) && $row['id_realisasi_tw1'] == 0) && 
-                        (isset($row['id_realisasi_tw2']) && $row['id_realisasi_tw2'] == 0) && 
-                        (isset($row['id_realisasi_tw3']) && $row['id_realisasi_tw3'] == 0) && 
-                        (isset($row['id_realisasi_tw4']) && $row['id_realisasi_tw4'] == 0)) {
-                        continue;  // Skip this row
-                    }
+        $realisasitw1 = (float) $row['id_realisasi_tw1'];
+        $realisasitw2 = (float) $row['id_realisasi_tw2'];
+        $realisasitw3 = (float) $row['id_realisasi_tw3'];
+        $realisasitw4 = (float) $row['id_realisasi_tw4'];
+        if ((isset($realisasitw1) && $realisasitw1 == 0) && 
+        (isset($realisasitw2) && $realisasitw2== 0) && 
+         (isset($realisasitw3) && $realisasitw3== 0) && 
+         (isset($realisasitw4) && $realisasitw4== 0)) {
+         continue;  // Skip this row
+     }
 
-                    // Sum up the values for the non-zero rows
-                    $tw1_sum += isset($row['id_realisasi_tw1']) ? $row['id_realisasi_tw1'] : 0;
-                    $tw2_sum += isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
-                    $tw3_sum += isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
-                    $tw4_sum += isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
+     // Sum up the values for the non-zero rows
+     $tw1_sum += isset($realisasitw1) ? $realisasitw1 : 0;
+     $tw2_sum += isset($realisasitw2) ? $realisasitw2 : 0;
+     $tw3_sum += isset($realisasitw3) ? $realisasitw3: 0;
+     $tw4_sum += isset($realisasitw4) ? $realisasitw4 : 0;
 
-                    // Increment the count for valid rows
-                    $count++;
-                }
-    $tw1_avg = $count > 0 ? (($tw1_sum / $count) / 100) * 100 : 0;
-    $tw2_avg = $count > 0 ? (($tw2_sum / $count) / 100) * 100 : 0;
-    $tw3_avg = $count > 0 ? (($tw3_sum / $count) / 100) * 100 : 0;
-    $tw4_avg = $count > 0 ? (($tw4_sum / $count) / 100) * 100 : 0;
+     // Increment the count for valid rows
+     $count++;
+ }
+    $tw1_avg = $count > 0 ? ($tw1_sum / $count) : 0;
+    $tw2_avg = $count > 0 ? ($tw2_sum / $count) : 0;
+    $tw3_avg = $count > 0 ? ($tw3_sum / $count) : 0;
+    $tw4_avg = $count > 0 ? ($tw4_sum / $count) : 0;
 
     return [
         'tw1_avg' => $tw1_avg,
@@ -220,27 +233,31 @@ function computeAverages3($data) {
     $count = 0;
 
     foreach ($data as $row) {
+                    $realisasitw1 = (float) $row['id_realisasi_tw1'];
+                    $realisasitw2 = (float) $row['id_realisasi_tw2'];
+                    $realisasitw3 = (float) $row['id_realisasi_tw3'];
+                    $realisasitw4 = (float) $row['id_realisasi_tw4'];
         // Check if all TW values are 0
-        if ((isset($row['id_realisasi_tw1']) && $row['id_realisasi_tw1'] == 0) && 
-        (isset($row['id_realisasi_tw2']) && $row['id_realisasi_tw2'] == 0) && 
-        (isset($row['id_realisasi_tw3']) && $row['id_realisasi_tw3'] == 0) && 
-        (isset($row['id_realisasi_tw4']) && $row['id_realisasi_tw4'] == 0)) {
+        if ((isset($realisasitw1) && $realisasitw1 == 0) && 
+       (isset($realisasitw2) && $realisasitw2== 0) && 
+        (isset($realisasitw3) && $realisasitw3== 0) && 
+        (isset($realisasitw4) && $realisasitw4== 0)) {
         continue;  // Skip this row
     }
 
     // Sum up the values for the non-zero rows
-    $tw1_sum += isset($row['id_realisasi_tw1']) ? $row['id_realisasi_tw1'] : 0;
-    $tw2_sum += isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
-    $tw3_sum += isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
-    $tw4_sum += isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
+    $tw1_sum += isset($realisasitw1) ? $realisasitw1 : 0;
+    $tw2_sum += isset($realisasitw2) ? $realisasitw2 : 0;
+    $tw3_sum += isset($realisasitw3) ? $realisasitw3 : 0;
+    $tw4_sum += isset($realisasitw4) ? $realisasitw4: 0;
 
     // Increment the count for valid rows
     $count++;
 }
-    $tw1_avg = $count > 0 ? (($tw1_sum / $count) / 99) * 100 : 0;
-    $tw2_avg = $count > 0 ? (($tw2_sum / $count) / 99) * 100 : 0;
-    $tw3_avg = $count > 0 ? (($tw3_sum / $count) / 99) * 100 : 0;
-    $tw4_avg = $count > 0 ? (($tw4_sum / $count) / 99) * 100 : 0;
+    $tw1_avg = $count > 0 ? ($tw1_sum / $count) : 0;
+    $tw2_avg = $count > 0 ? ($tw2_sum / $count) : 0;
+    $tw3_avg = $count > 0 ? ($tw3_sum / $count) : 0;
+    $tw4_avg = $count > 0 ? ($tw4_sum / $count) : 0;
 
     return [
         'tw1_avg' => $tw1_avg,
@@ -258,27 +275,31 @@ function computeAverages4($data) {
     $count = 0;
 
     foreach ($data as $row) {
+                    $realisasitw1 = (float) $row['id_realisasi_tw1'];
+                    $realisasitw2 = (float) $row['id_realisasi_tw2'];
+                    $realisasitw3 = (float) $row['id_realisasi_tw3'];
+                    $realisasitw4 = (float) $row['id_realisasi_tw4'];
         // Check if all TW values are 0
-        if ((isset($row['id_realisasi_tw1']) && $row['id_realisasi_tw1'] == 0) && 
-        (isset($row['id_realisasi_tw2']) && $row['id_realisasi_tw2'] == 0) && 
-        (isset($row['id_realisasi_tw3']) && $row['id_realisasi_tw3'] == 0) && 
-        (isset($row['id_realisasi_tw4']) && $row['id_realisasi_tw4'] == 0)) {
+        if ((isset($realisasitw1) && $realisasitw1 == 0) && 
+       (isset($realisasitw2) && $realisasitw2== 0) && 
+        (isset($realisasitw3) && $realisasitw3== 0) && 
+        (isset($realisasitw4) && $realisasitw4== 0)) {
         continue;  // Skip this row
     }
 
     // Sum up the values for the non-zero rows
-    $tw1_sum += isset($row['id_realisasi_tw1']) ? $row['id_realisasi_tw1'] : 0;
-    $tw2_sum += isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
-    $tw3_sum += isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
-    $tw4_sum += isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
+    $tw1_sum += isset($realisasitw1) ? $realisasitw1 : 0;
+    $tw2_sum += isset($realisasitw2) ? $realisasitw2 : 0;
+    $tw3_sum += isset($realisasitw3) ? $realisasitw3 : 0;
+    $tw4_sum += isset($realisasitw4) ? $realisasitw4: 0;
 
     // Increment the count for valid rows
     $count++;
 }
-    $tw1_avg = $count > 0 ? (($tw1_sum / $count) / 95) * 100 : 0;
-    $tw2_avg = $count > 0 ? (($tw2_sum / $count) / 95) * 100 : 0;
-    $tw3_avg = $count > 0 ? (($tw3_sum / $count) / 95) * 100 : 0;
-    $tw4_avg = $count > 0 ? (($tw4_sum / $count) / 95) * 100 : 0;
+    $tw1_avg = $count > 0 ? ($tw1_sum / $count) : 0;
+    $tw2_avg = $count > 0 ? ($tw2_sum / $count) : 0;
+    $tw3_avg = $count > 0 ? ($tw3_sum / $count) : 0;
+    $tw4_avg = $count > 0 ? ($tw4_sum / $count) : 0;
 
     return [
         'tw1_avg' => $tw1_avg,
@@ -296,26 +317,30 @@ function computeAverages5($data) {
     $count = 0;
 
     foreach ($data as $row) {
-        if ((isset($row['id_realisasi_tw1']) && $row['id_realisasi_tw1'] == 0) && 
-        (isset($row['id_realisasi_tw2']) && $row['id_realisasi_tw2'] == 0) && 
-        (isset($row['id_realisasi_tw3']) && $row['id_realisasi_tw3'] == 0) && 
-        (isset($row['id_realisasi_tw4']) && $row['id_realisasi_tw4'] == 0)) {
+                    $realisasitw1 = (float) $row['id_realisasi_tw1'];
+                    $realisasitw2 = (float) $row['id_realisasi_tw2'];
+                    $realisasitw3 = (float) $row['id_realisasi_tw3'];
+                    $realisasitw4 = (float) $row['id_realisasi_tw4'];
+        if ((isset($realisasitw1) && $realisasitw1 == 0) && 
+       (isset($realisasitw2) && $realisasitw2== 0) && 
+        (isset($realisasitw3) && $realisasitw3== 0) && 
+        (isset($realisasitw4) && $realisasitw4== 0)) {
         continue;  // Skip this row
     }
 
     // Sum up the values for the non-zero rows
-    $tw1_sum += isset($row['id_realisasi_tw1']) ? $row['id_realisasi_tw1'] : 0;
-    $tw2_sum += isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
-    $tw3_sum += isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
-    $tw4_sum += isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
+    $tw1_sum += isset($realisasitw1) ? $realisasitw1 : 0;
+    $tw2_sum += isset($realisasitw2) ? $realisasitw2 : 0;
+    $tw3_sum += isset($realisasitw3) ? $realisasitw3 : 0;
+    $tw4_sum += isset($realisasitw4) ? $realisasitw4: 0;
 
     // Increment the count for valid rows
     $count++;
 }
-    $tw1_avg = $count > 0 ? (($tw1_sum / $count) / 85) * 100 : 0;
-    $tw2_avg = $count > 0 ? (($tw2_sum / $count) / 85) * 100 : 0;
-    $tw3_avg = $count > 0 ? (($tw3_sum / $count) / 85) * 100 : 0;
-    $tw4_avg = $count > 0 ? (($tw4_sum / $count) / 85) * 100 : 0;
+    $tw1_avg = $count > 0 ? ($tw1_sum / $count) : 0;
+    $tw2_avg = $count > 0 ? ($tw2_sum / $count) : 0;
+    $tw3_avg = $count > 0 ? ($tw3_sum / $count) : 0;
+    $tw4_avg = $count > 0 ? ($tw4_sum / $count) : 0;
     return [
         'tw1_avg' => $tw1_avg,
         'tw1_real_avg' => $tw1_avg > 0 ? ($tw1_avg/85) * 100 : 0,
@@ -332,26 +357,30 @@ function computeAverages6($data) {
     $count = 0;
 
     foreach ($data as $row) {
-        if ((isset($row['id_realisasi_tw1']) && $row['id_realisasi_tw1'] == 0) && 
-        (isset($row['id_realisasi_tw2']) && $row['id_realisasi_tw2'] == 0) && 
-        (isset($row['id_realisasi_tw3']) && $row['id_realisasi_tw3'] == 0) && 
-        (isset($row['id_realisasi_tw4']) && $row['id_realisasi_tw4'] == 0)) {
+                    $realisasitw1 = (float) $row['id_realisasi_tw1'];
+                    $realisasitw2 = (float) $row['id_realisasi_tw2'];
+                    $realisasitw3 = (float) $row['id_realisasi_tw3'];
+                    $realisasitw4 = (float) $row['id_realisasi_tw4'];
+        if ((isset($realisasitw1) && $realisasitw1 == 0) && 
+       (isset($realisasitw2) && $realisasitw2== 0) && 
+        (isset($realisasitw3) && $realisasitw3== 0) && 
+        (isset($realisasitw4) && $realisasitw4== 0)) {
         continue;  // Skip this row
     }
 
     // Sum up the values for the non-zero rows
-    $tw1_sum += isset($row['id_realisasi_tw1']) ? $row['id_realisasi_tw1'] : 0;
-    $tw2_sum += isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
-    $tw3_sum += isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
-    $tw4_sum += isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
+    $tw1_sum += isset($realisasitw1) ? $realisasitw1 : 0;
+    $tw2_sum += isset($realisasitw2) ? $realisasitw2 : 0;
+    $tw3_sum += isset($realisasitw3) ? $realisasitw3 : 0;
+    $tw4_sum += isset($realisasitw4) ? $realisasitw4: 0;
 
     // Increment the count for valid rows
     $count++;
 }
-    $tw1_avg = $count > 0 ? (($tw1_sum / $count) / 75) * 100 : 0;
-    $tw2_avg = $count > 0 ? (($tw2_sum / $count) / 75) * 100 : 0;
-    $tw3_avg = $count > 0 ? (($tw3_sum / $count) / 75) * 100 : 0;
-    $tw4_avg = $count > 0 ? (($tw4_sum / $count) / 75) * 100 : 0;
+    $tw1_avg = $count > 0 ? ($tw1_sum / $count) : 0;
+    $tw2_avg = $count > 0 ? ($tw2_sum / $count) : 0;
+    $tw3_avg = $count > 0 ? ($tw3_sum / $count) : 0;
+    $tw4_avg = $count > 0 ? ($tw4_sum / $count) : 0;
     return [
         'tw1_avg' => $tw1_avg,
         'tw1_real_avg' => $tw1_avg > 0 ? ($tw1_avg/75) * 100 : 0,
@@ -382,10 +411,10 @@ function renderAverages($data) {
 
 function renderAverages2($data) {
     $averages = computeAverages($data);  // Menghitung rata-rata untuk setiap TW
-    
+    echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Profesionalisme Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Rata-rata Per Triwulan</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -402,7 +431,7 @@ function renderAverages2($data) {
     echo "<tr>";
     
     // Sasaran strategis dan target
-    echo "<td>Indikator Kinerja Utama 1. Meningkatnya Profesionalisme Aparatur Kejaksaan RI</td>";
+    echo "<td> 1. Meningkatnya Profesionalisme Aparatur Kejaksaan RI</td>";
     echo "<td>90</td>"; // Target nilai
     
     // Nilai rata-rata untuk setiap triwulan dengan data-* untuk JavaScript
@@ -421,9 +450,10 @@ function renderAverages2($data) {
 
 function renderAverages3($data) {
     $averages = computeAverages($data);
+    echo "<h2 class = 'display-font-sizes-1 text-center'>Terwujudnya Upaya Pencegahan Tindak Pidana Korupsi</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Rata-rata Per Triwulan</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -439,7 +469,7 @@ function renderAverages3($data) {
     // Render row for the specific Sasaran Strategis and the TW averages
     echo "<tbody>";
     echo "<tr>";
-    echo "<td>Indikator Kinerja Utama 3. Terwujudnya Upaya Pencegahan Tindak Pidana Korupsi </td>"; // Description of the strategic goal
+    echo "<td> 3. Terwujudnya Upaya Pencegahan Tindak Pidana Korupsi </td>"; // Description of the strategic goal
     echo "<td>90</td>";
     echo "<td data-tw='1'>" . number_format($averages['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages['tw1_real_avg'], 2) . "</td>";
@@ -455,9 +485,10 @@ function renderAverages3($data) {
 }
 function renderAverages4($data) {
     $averages = computeAverages6($data);
+    echo "<h2 class = 'display-font-sizes-1 text-center'>Terwujudnya Optimalisasi Kinerja Aparatur Kejaksaan </h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Rata-rata Per Triwulan</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -471,9 +502,10 @@ function renderAverages4($data) {
     echo "</thead>";
     
     // Render row for the specific Sasaran Strategis and the TW averages
+    
     echo "<tbody>";
     echo "<tr>";
-    echo "<td>Indikator Kinerja Utama 6. Terwujudnya Optimalisasi Kinerja Aparatur Kejaksaan </td>";
+    echo "<td> 6. Persentase Satuan Kerja Kejaksaan RI yang berhasil menerapkan Sarana dan Prasarana berbasis Teknologi Informasi</td>";
     echo "<td>75</td>"; // Description of the strategic goal
     echo "<td data-tw='1'>" . number_format($averages['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages['tw1_real_avg'], 2) . "</td>";
@@ -492,9 +524,13 @@ function renderAveragesForParts($part1, $part2, $part3) {
     $averages1 = computeAverages2($part1);
     $averages2 = computeAverages4($part2);
     $averages3 = computeAverages($part3);
+    $averageutama1 = computeAverages1($part1);
+    $averageutama2 = computeAverages1($part2);
+    $averageutama3 = computeAverages1($part3);
+    echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Akuntabilitas dan Integritas Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Rata-rata Per Triwulan</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -510,40 +546,40 @@ function renderAveragesForParts($part1, $part2, $part3) {
     // Render row for the specific Sasaran Strategis and the TW averages
     echo "<tbody>";
     echo "<tr>";
-    echo "<td>Indikator Kinerja Utama 2.1 Persentase Nilai SPIP Kejaksaan RI </td>";
+    echo "<td> 2.1 Persentase Nilai SPIP Kejaksaan RI </td>";
     echo "<td>100</td>"; // Description of the strategic goal
-    echo "<td data-tw='1'>" . number_format($averages1['tw1_avg'], 2) . "</td>";
-    echo "<td data-tw='1'>" . number_format($averages1['tw1_real_avg'], 2) . "</td>";
-    echo "<td data-tw='2'>" . number_format($averages1['tw2_avg'], 2) . "</td>";
-    echo "<td data-tw='2'>" . number_format($averages1['tw2_real_avg'], 2) . "</td>";
-    echo "<td data-tw='3'>" . number_format($averages1['tw3_avg'], 2) . "</td>";
-    echo "<td data-tw='3'>" . number_format($averages1['tw3_real_avg'], 2) . "</td>";
-    echo "<td data-tw='4'>" . number_format($averages1['tw4_avg'], 2) . "</td>";
-    echo "<td data-tw='4'>" . number_format($averages1['tw4_real_avg'], 2) . "</td>";
+    echo "<td data-tw='1'>" . number_format($averageutama1['tw1_avg'], 2)*25 . "</td>";
+    echo "<td data-tw='1'>" . number_format($averages1['tw1_real_avg'], 2)*25 . "</td>";
+    echo "<td data-tw='2'>" . number_format($averageutama1['tw2_avg'], 2)*25 . "</td>";
+    echo "<td data-tw='2'>" . number_format($averages1['tw2_real_avg'], 2)*25 . "</td>";
+    echo "<td data-tw='3'>" . number_format($averageutama1['tw3_avg'], 2)*25 . "</td>";
+    echo "<td data-tw='3'>" . number_format($averages1['tw3_real_avg'], 2)*25 . "</td>";
+    echo "<td data-tw='4'>" . number_format($averageutama1['tw4_avg'], 2)*25 . "</td>";
+    echo "<td data-tw='4'>" . number_format($averages1['tw4_real_avg'], 2)*25 . "</td>";
     echo "</tr>";
     "<tr>";
-    echo "<td>Indikator Kinerja Utama 2.2 Persentase Nilai SAKIP Kejaksaan RI </td>"; // Description of the strategic goal
+    echo "<td> 2.2 Persentase Nilai SAKIP Kejaksaan RI </td>"; // Description of the strategic goal
     echo "<td>95</td>"; 
-    echo "<td data-tw='1'>" . number_format($averages2['tw1_avg'], 2) . "</td>";
+    echo "<td data-tw='1'>" . number_format($averageutama2['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages2['tw1_real_avg'], 2) . "</td>";
-    echo "<td data-tw='2'>" . number_format($averages2['tw2_avg'], 2) . "</td>";
+    echo "<td data-tw='2'>" . number_format($averageutama2['tw2_avg'], 2) . "</td>";
     echo "<td data-tw='2'>" . number_format($averages2['tw2_real_avg'], 2) . "</td>";
-    echo "<td data-tw='3'>" . number_format($averages2['tw3_avg'], 2) . "</td>";
+    echo "<td data-tw='3'>" . number_format($averageutama2['tw3_avg'], 2) . "</td>";
     echo "<td data-tw='3'>" . number_format($averages2['tw3_real_avg'], 2) . "</td>";
-    echo "<td data-tw='4'>" . number_format($averages2['tw4_avg'], 2) . "</td>";
+    echo "<td data-tw='4'>" . number_format($averageutama2['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages2['tw4_real_avg'], 2) . "</td>";
     echo "</tr>";
     echo "</tbody>";
     "<tr>";
-    echo "<td>Indikator Kinerja Utama 2.3 Persentase Berkurangnya Laporan Pengaduan Masyarakat terhadap Aparatur Kejaksaan RI </td>"; // Description of the strategic goal
+    echo "<td> 2.3 Persentase Berkurangnya Laporan Pengaduan Masyarakat terhadap Aparatur Kejaksaan RI </td>"; // Description of the strategic goal
     echo "<td>90</td>"; 
-    echo "<td data-tw='1'>" . number_format($averages3['tw1_avg'], 2) . "</td>";
+    echo "<td data-tw='1'>" . number_format($averageutama3['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages3['tw1_real_avg'], 2) . "</td>";
-    echo "<td data-tw='2'>" . number_format($averages3['tw2_avg'], 2) . "</td>";
+    echo "<td data-tw='2'>" . number_format($averageutama3['tw2_avg'], 2) . "</td>";
     echo "<td data-tw='2'>" . number_format($averages3['tw2_real_avg'], 2) . "</td>";
-    echo "<td data-tw='3'>" . number_format($averages3['tw3_avg'], 2) . "</td>";
+    echo "<td data-tw='3'>" . number_format($averageutama3['tw3_avg'], 2) . "</td>";
     echo "<td data-tw='3'>" . number_format($averages3['tw3_real_avg'], 2) . "</td>";
-    echo "<td data-tw='4'>" . number_format($averages3['tw4_avg'], 2) . "</td>";
+    echo "<td data-tw='4'>" . number_format($averageutama3['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages3['tw4_real_avg'], 2) . "</td>";
     echo "</tr>";
     echo "</tbody>";
@@ -552,9 +588,10 @@ function renderAveragesForParts($part1, $part2, $part3) {
 function renderAveragesForParts2($part1, $part2) {
     $averages1 = computeAverages3($part1);
     $averages2 = computeAverages($part2);
+    echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Keberhasilan Penyelesaian Perkara Tindak Pidana</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Rata-rata Per Triwulan</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -570,7 +607,7 @@ function renderAveragesForParts2($part1, $part2) {
     // Render row for the specific Sasaran Strategis and the TW averages
     echo "<tbody>";
     echo "<tr>";
-    echo "<td>Indikator Kinerja Utama 4.1 Persentase penyelesaian Perkara Tindak Pidana Umum yang mempunyai kekuatan hukum tetap dan telah dieksekusi </td>"; // Description of the strategic goal
+    echo "<td> 4.1 Persentase penyelesaian Perkara Tindak Pidana Umum yang mempunyai kekuatan hukum tetap dan telah dieksekusi </td>"; // Description of the strategic goal
     echo "<td>99</td>";
     echo "<td data-tw='1'>" . number_format($averages1['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages1['tw1_real_avg'], 2) . "</td>";
@@ -582,7 +619,7 @@ function renderAveragesForParts2($part1, $part2) {
     echo "<td data-tw='4'>" . number_format($averages1['tw4_real_avg'], 2) . "</td>";
     echo "</tr>";
    echo "<tr>";
-    echo "<td>Indikator Kinerja Utama 4.2 Persentase penyelesaian Perkara Tindak Pidana Khusus yang mempunyai kekuatan hukum tetap dan telah dieksekusi </td>"; // Description of the strategic goal
+    echo "<td> 4.2 Persentase penyelesaian Perkara Tindak Pidana Khusus yang mempunyai kekuatan hukum tetap dan telah dieksekusi </td>"; // Description of the strategic goal
     echo '<td>90</td>';
     echo "<td data-tw='1'>" . number_format($averages2['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages2['tw1_real_avg'], 2) . "</td>";
@@ -599,9 +636,10 @@ function renderAveragesForParts2($part1, $part2) {
 function renderAveragesForParts3($part1, $part2) {
     $averages1 = computeAverages5($part1);
     $averages2 = computeAverages5($part2);
+    echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Profesionalisme Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Rata-rata Per Triwulan</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -617,7 +655,7 @@ function renderAveragesForParts3($part1, $part2) {
     // Render row for the specific Sasaran Strategis and the TW averages
     echo "<tbody>";
     echo "<tr>";
-    echo "<td>Indikator Kinerja Utama 5.1 Persentase penyelamatan dan pengembalian kerugian negara melalui jalur pidana</td>"; // Description of the strategic goal
+    echo "<td> 5.1 Persentase penyelamatan dan pengembalian kerugian negara melalui jalur pidana</td>"; // Description of the strategic goal
     echo '<td>85</td>';
     echo "<td data-tw='1'>" . number_format($averages1['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages1['tw1_real_avg'], 2) . "</td>";
@@ -629,7 +667,7 @@ function renderAveragesForParts3($part1, $part2) {
     echo "<td data-tw='4'>" . number_format($averages1['tw4_real_avg'], 2) . "</td>";
     echo "</tr>";
     "<tr>";
-    echo "<td>Indikator Kinerja Utama 5.2 Persentase penyelamatan dan pengembalian kerugian negara melalui jalur perdata</td>"; // Description of the strategic goal
+    echo "<td> 5.2 Persentase penyelamatan dan pengembalian kerugian negara melalui jalur perdata</td>"; // Description of the strategic goal
     echo '<td>85</td>S';
     echo "<td data-tw='1'>" . number_format($averages2['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages2['tw1_real_avg'], 2) . "</td>";
@@ -667,8 +705,12 @@ function renderTable($data, $tableId) {
         </thead>";
         echo "<tbody>";
         foreach ($data as $row) {
+                    $realisasitw1 = (float) $row['id_realisasi_tw1'];
+                    $realisasitw2 = (float) $row['id_realisasi_tw2'];
+                    $realisasitw3 = (float) $row['id_realisasi_tw3'];
+                    $realisasitw4 = (float) $row['id_realisasi_tw4'];
             // Perhitungan verifikasi pencapaian
-            $tw1 = isset($row['id_realisasi_tw1']) ? $row['id_realisasi_tw1'] : 0;
+            $tw1 = isset($realisasitw1) ? $realisasitw1 : 0;
             $tw2 = isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
             $tw3 = isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
             $tw4 = isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
@@ -699,53 +741,7 @@ function renderTable($data, $tableId) {
     }
 }
 
-function renderTable2($data, $tableId) {
-    if (!empty($data)) {
 
-        echo "<table id='$tableId' class='table table-bordered visually-hidden'>";
-        echo "<thead>
-            <tr>
-                <th>Indikator Kinerja Utama (IKU)</th>
-                <th>CAPAIAN TW1</th>
-                <th>CAPAIAN TW2</th>
-                <th>CAPAIAN TW3</th>
-                <th>CAPAIAN TW4</th>
-            </tr>
-        </thead>";
-        echo "<tbody>";
-        foreach ($data as $row) {
-
-            $tw1 = isset($row['id_realisasi_tw1']) ? $row['id_realisasi_tw1'] : 0;
-            $tw2 = isset($row['id_realisasi_tw2']) ? $row['id_realisasi_tw2'] : 0;
-            $tw3 = isset($row['id_realisasi_tw3']) ? $row['id_realisasi_tw3'] : 0;
-            $tw4 = isset($row['id_realisasi_tw4']) ? $row['id_realisasi_tw4'] : 0;
-            $target = isset($row['id_target']) ? $row['id_target'] : 0;
-
-            // Determine the latest filled TW
-            $latestTW = 0;
-            if ($tw4 > 0) {
-                $latestTW = $tw4;
-            } elseif ($tw3 > 0) {
-                $latestTW = $tw3;
-            } elseif ($tw2 > 0) {
-                $latestTW = $tw2;
-            } elseif ($tw1 > 0) {
-                $latestTW = $tw1;
-            }
-            echo "<tr>";
-            echo "<td>Persentase aparatur Kejaksaan RI yang memiliki sertifikat kompentensi dan atau keahlian</td>";
-            echo "<td>" . htmlspecialchars($row['id_realisasi_tw1']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['id_realisasi_tw2']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['id_realisasi_tw3']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['id_realisasi_tw4']) . "</td>";// New verification column with color
-            echo "</tr>";
-        }
-        echo "</tbody></table>";
-    } else {
-        echo "<table id='$tableId' class='data-table visually-hidden'>";
-        echo "<tr><td colspan='10'>No data found.</td></tr></table>";
-    }
-}
 // Function to export data to Excel
 function exportToExcel($data, $filename) {
     header('Content-Type: application/vnd.ms-excel');
@@ -820,7 +816,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Capaian SAKIP Kejaksaan RI</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src = "js/bootstrap.js"> </script>
+    <script src = "js/bootstrap.bundle.min.js"> </script>
     <script type="text/javascript" >
     document.addEventListener('DOMContentLoaded', function() {
     const rowsPerPage = 10;
@@ -962,9 +958,18 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
     </script>
 </head>
 <body>
+<nav class="navbar navbar-light bg-warning-subtle mb-2 p-1 nav">
+    <div class="container">
+    <a class="navbar-brand">
+    <img src="images/logo_kejaksaan.png" alt="Logo Kejaksaan RI" width="50"/>
+    Serenata AKIP Kejaksaan RI
+    </a>
+    <a class="nav-link btn-info active" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
+    </div>
+</nav>
 
 <div class="container-sm">
-
+<h2 class = "text-center">Selamat Datang <?php if($user == 'menpanrb') echo 'Kementrian PAN RB';?></h2>
 <h2 class = "text-center">Data Capaian Kinerja Sasaran Strategis Kejaksaan RI</h2>
 
 <div class="btn-container row align-items-center">
@@ -975,14 +980,19 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
     <button class="btn btn-primary col m-2" onclick="showTable(5)">Sasaran Strategis 5</button>
     <button class="btn btn-primary col m-2" onclick="showTable(6)">Sasaran Strategis 6</button>
 </div>
-<div class="btn-container row align-items-center">
+
+    <div class="btn-container row align-items-center">
+    <?php if($user == '888881') : ?>
     <button class="btn btn-success col m-2" onclick="exportToExcel(1)">Export Sasaran Strategis 1</button>
     <button class="btn btn-success col m-2" onclick="exportToExcel(2)">Export Sasaran Strategis 2</button>
     <button class="btn btn-success col m-2" onclick="exportToExcel(3)">Export Sasaran Strategis 3</button>
     <button class="btn btn-success col m-2" onclick="exportToExcel(4)">Export Sasaran Strategis 4</button>
     <button class="btn btn-success col m-2" onclick="exportToExcel(5)">Export Sasaran Strategis 5</button>
     <button class="btn btn-success col m-2" onclick="exportToExcel(6)">Export Sasaran Strategis 6</button>
+    <?php endif; ?>
+                    
 </div>
+
 <!-- Dropdown for selecting Triwulan -->
 <div class="dropdown mb-3">
     <label for="twFilter">Pilih Triwulan:</label>
@@ -1004,7 +1014,6 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 
 <div class="table-container visually-hidden" id="table-container-1">
         <?php renderTable($data_indikator1, 'data_indikator1'); ?>
-        <?php renderAverages($data_indikator1); ?>
     </div>
     
 <div class="averages-container visually-hidden" id="averages-container-2">
@@ -1014,7 +1023,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 
 <div class="table-container visually-hidden" id="table-container-2">
         <?php renderTable($data_indikator2, 'data_indikator2'); ?>
-        <?php renderAverages($data_indikator2); ?>
+
 </div>
 
 <div class="averages-container visually-hidden" id="averages-container-3">
@@ -1023,7 +1032,6 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 </div>
 <div class="table-container visually-hidden" id="table-container-3">
         <?php renderTable($data_indikator3, 'data_indikator3'); ?>
-        <?php renderAverages($data_indikator3); ?>
 </div>
 
 <div class="averages-container visually-hidden" id="averages-container-4">
@@ -1032,7 +1040,6 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 </div>
 <div class="table-container visually-hidden" id="table-container-4" >
         <?php renderTable($data_indikator4, 'data_indikator4'); ?>
-        <?php renderAverages($data_indikator4); ?>
 </div>
 
 <div class="averages-container visually-hidden" id="averages-container-5">
@@ -1041,7 +1048,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 </div>
 <div class="table-container visually-hidden" id="table-container-5" >
         <?php renderTable($data_indikator5, 'data_indikator5'); ?>
-        <?php renderAverages($data_indikator5); ?>
+
 </div>
 
 <div class="averages-container visually-hidden" id="averages-container-6">
@@ -1050,18 +1057,18 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 </div>
 <div class="table-container visually-hidden" id="table-container-6" >
         <?php renderTable($data_indikator6, 'data_indikator6'); ?>
-        <?php renderAverages($data_indikator6); ?>
 </div>
 <div class="container visually-hidden" id="averages6">
 
 </div>
 <!-- Pagination Controls -->
-<div class="pagination m-1"></div>
+<div class="pagination m-2 p-2 justify-content-center "></div>
 
 </div>
 </body>
 </html>
 <?php
+
 
 } else {
     // Jika bukan 'menpanrb', redirect ke halaman error atau halaman lain
