@@ -57,7 +57,9 @@ print ('
 <td width="23%">Indikator</td>
 <td width="6%"><center>Target</center></td>
 <td width="6%"><center>Realisasi TW1</center></td>
-<td width="14%"><center>Narasi TW1</center></td>
+<td width="10%"><center>Capaian Kinerja TW1</center></td>
+<td width="10%"><center>Kendala dan Hambatan TW1</center></td>
+<td width="10%"><center>Langkah Strategi/Optimalisasi TW1</center></td>
 <td width="6%"><center>Tipe</center></td>
 </tr>
 </thead><tbody>
@@ -106,6 +108,8 @@ print ('<td>'.$row2['indikator_nama'].'</td>');
 print ('<td><center><b>'.$ar['id_target'].'</b></center></td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw1'].'</b></center></td>');
 print ('<td>'.$ar['id_narasi_tw1'].'</td>');
+print ('<td>'.$ar['id_narasi_tw1_2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw1_3'].'</td>');
 
 //----------------------------
 print ('<td>');
@@ -165,7 +169,9 @@ print ('
 <td width="23%">Indikator</td>
 <td width="6%"><center>Target</center></td>
 <td width="6%"><center>Realisasi TW2</center></td>
-<td width="14%"><center>Narasi TW2</center></td>
+<td width="10%"><center>Capaian Kinerja TW2</center></td>
+<td width="10%"><center>Kendala dan Hambatan TW2</center></td>
+<td width="10%"><center>Langkah Strategi/Optimalisasi TW2</center></td>
 <td width="6%"><center>Tipe</center></td>
 </tr>
 </thead><tbody>
@@ -214,6 +220,8 @@ print ('<td>'.$row2['indikator_nama'].'</td>');
 print ('<td><center><b>'.$ar['id_target'].'</b></center></td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw2'].'</b></center></td>');
 print ('<td>'.$ar['id_narasi_tw2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw2_2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw2_3'].'</td>');
 
 //----------------------------
 print ('<td>');
@@ -273,7 +281,9 @@ print ('
 <td width="23%">Indikator</td>
 <td width="6%"><center>Target</center></td>
 <td width="6%"><center>Realisasi TW3</center></td>
-<td width="14%"><center>Narasi TW3</center></td>
+<td width="10%"><center>Capaian Kinerja TW3</center></td>
+<td width="10%"><center>Kendala dan Hambatan TW3</center></td>
+<td width="10%"><center>Langkah Strategi/Optimalisasi TW3</center></td>
 <td width="6%"><center>Tipe</center></td>
 </tr>
 </thead><tbody>
@@ -322,6 +332,8 @@ print ('<td>'.$row2['indikator_nama'].'</td>');
 print ('<td><center><b>'.$ar['id_target'].'</b></center></td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw3'].'</b></center></td>');
 print ('<td>'.$ar['id_narasi_tw3'].'</td>');
+print ('<td>'.$ar['id_narasi_tw3_2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw3_3'].'</td>');
 
 //----------------------------
 print ('<td>');
@@ -381,7 +393,9 @@ print ('
 <td width="23%">Indikator</td>
 <td width="6%"><center>Target</center></td>
 <td width="6%"><center>Realisasi TW4</center></td>
-<td width="14%"><center>Narasi TW4</center></td>
+<td width="10%"><center>Capaian Kinerja TW4</center></td>
+<td width="10%"><center>Kendala dan Hambatan TW4</center></td>
+<td width="10%"><center>Langkah Strategi/Optimalisasi TW4</center></td>
 <td width="6%"><center>Tipe</center></td>
 </tr>
 </thead><tbody>
@@ -430,6 +444,8 @@ print ('<td>'.$row2['indikator_nama'].'</td>');
 print ('<td><center><b>'.$ar['id_target'].'</b></center></td>');
 print ('<td><center><b>'.$ar['id_realisasi_tw4'].'</b></center></td>');
 print ('<td>'.$ar['id_narasi_tw4'].'</td>');
+print ('<td>'.$ar['id_narasi_tw4_2'].'</td>');
+print ('<td>'.$ar['id_narasi_tw4_3'].'</td>');
 
 //----------------------------
 print ('<td>');
