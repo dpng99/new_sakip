@@ -29,8 +29,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                 $offset = ($page - 1) * $records_per_page;
                 // Query to fetch detail from the id_satker with limit for pagination
                 $query = "SELECT sl.id_satker, sl.satkernama, pk.id_approved, pk.id_otentikasi_tw1, 
-                                 pk.id_otentikasi_tw2, pk.id_otentikasi_tw3, pk.id_otentikasi_tw4,
-                                 , pk.id_realisasi_tw1,pk.id_realisasi_tw2,pk.id_realisasi_tw3,pk.id_realisasi_tw4, 
+                                 pk.id_otentikasi_tw2, pk.id_otentikasi_tw3, pk.id_otentikasi_tw4, pk.id_realisasi_tw1,pk.id_realisasi_tw2,pk.id_realisasi_tw3,pk.id_realisasi_tw4, 
                                  sb.bidang_nama, sp.saspro_nama, ik.indikator_nama
                           FROM sinori_login sl
                           LEFT JOIN sinori_sakip_penetapan pk ON sl.id_satker = pk.id_satker
