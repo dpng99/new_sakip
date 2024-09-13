@@ -173,10 +173,10 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                         <td class='text-center'>${row.renja_satker ? `<a href='view.php?satker=${row.id_satker}&do=renja' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
                         <td class='text-center'>${row.pk_satker ? `<a href='view.php?satker=${row.id_satker}&do=pk' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
                        <td class='text-center'>
-    <a href='list_satker_detil.php?id_satker=<?php echo $row['id_satker']; ?>' class='btn btn-primary'>
-        <?php echo $row['status_capaian_kinerja']; ?>
-    </a>
-</td>
+                            <a href='list_satker_detil.php?id_satker=<?php echo $row['id_satker']; ?>' class='btn btn-primary'>
+                            <?php echo $row['status_capaian_kinerja']; ?>
+                            </a>
+                        </td>
 
                         <td class='text-center'>${row.iku_satker ? `<a href='view.php?satker=${row.id_satker}&do=iku' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
                         <td class='text-center'>${row.dipa_satker ? `<a href='view.php?satker=${row.id_satker}&do=dipa' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
