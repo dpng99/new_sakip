@@ -1,11 +1,10 @@
-<title>DASHBOARD PEMANTAUAN KEPATUHAN PELAKSANAAN AKIP</title><style type="text/css">
+<style type="text/css">
 <!--
 body {
 	background-image: url(themes/background.jpg);
 }
 -->
 </style>
-
 <LINK href="index.css" rel="stylesheet" type="text/css">
 <table width="100%"  border="0" cellspacing="4" cellpadding="4">
   <tr>
@@ -48,17 +47,13 @@ print ('
 <td width="5%"><center>Renstra</center></td>
 <td width="5%"><center>Renja</center></td>
 <td width="5%"><center>PK</center></td>
-<td width="10%"><center>Pengukuran Kinerja TW I</center></td>
-<td width="10%"><center>Pengukuran Kinerja TW II</center></td>
-<td width="15%"><center>Jumlah Capaian Kinerja</center></td>
-<td width="10%"><center>Narasi/center></td>
 <td width="5%"><center>IKU</center></td>
 <td width="5%"><center>DPA</center></td>
 <td width="5%"><center>Ren Aksi</center></td>
 <td width="5%"><center>TL LHE</center></td>
 <td width="5%"><center>Pohon Kinerja</center></td>
 <td width="5%"><center>LKjIP</center></td>
-
+<td width="15%"><center>Jumlah Capaian Kinerja</center></td>
 
 </tr>
 </thead><tbody>
@@ -84,14 +79,14 @@ if ($keps2['id_filesurat'] == "") {
 print ('<center>-</center>');  
 } 
 else {
-print ('<center><img src="images/centang.png" width="30" height="30"></center>');  
+print ('<center><b>OK</b></center>');  
 } 
 }
 print ('</center></td>');
 //-------------
 //renstra
 print ('<td><center>');
-$renstra = mysqli_query($link, "SELECT * FROM sinori_sakip_renstra where id_satker = '".$ar['id_satker']."'");
+$renstra = mysqli_query($link, "SELECT * FROM sinori_sakip_renstra where id_satker = '".$ar['id_satker']."' order by id desc LIMIT 1");
 $dataren = array ();
 while (($rowren = mysqli_fetch_array($renstra)) != null){
 $dataren[] = $rowren;
@@ -101,13 +96,13 @@ if ($xnumren == "0") {
 print ('<center>-</center>');  
 } 
 else {
-print ('<center><img src="images/centang.png" width="30" height="30"></center>');  
+print ('<center><b>OK</b></center>');  
 } 
 print ('</center></td>');
 //=---------
 //renja
 print ('<td><center>');
-$renja = mysqli_query($link, "SELECT * FROM sinori_sakip_renja where id_satker = '".$ar['id_satker']."'");
+$renja = mysqli_query($link, "SELECT * FROM sinori_sakip_renja where id_satker = '".$ar['id_satker']."' order by id desc LIMIT 1");
 $dataja = array ();
 while (($rowja = mysqli_fetch_array($renja)) != null){
 $dataja[] = $rowja;
@@ -117,13 +112,13 @@ if ($xnumja == "0") {
 print ('<center>-</center>');  
 } 
 else {
-print ('<center><img src="images/centang.png" width="30" height="30"></center>');  
+print ('<center><b>OK</b></center>');  
 } 
 print ('</center></td>');
 //=---------
 //tap kinerja
 print ('<td><center>');
-$tapker = mysqli_query($link, "SELECT * FROM sinori_sakip_penetapan where id_satker = '".$ar['id_satker']."' and id_hide !='1'");
+$tapker = mysqli_query($link, "SELECT * FROM sinori_sakip_penetapan where id_satker = '".$ar['id_satker']."' order by id desc LIMIT 1");
 $datatapker = array ();
 while (($rowtapker = mysqli_fetch_array($tapker)) != null){
 $datatapker[] = $rowtapker;
@@ -133,96 +128,42 @@ if ($xnumtapker == "0") {
 print ('<center>-</center>');  
 } 
 else {
-print ('<center><img src="images/centang.png" width="30" height="30"></center>');  
+print ('<center><b>OK</b></center>');  
 } 
 print ('</center></td>');
 //-------------
-print ('<td><center>'.$xnumtapker.'</center></td>');
-//IKU
-print ('<td><center>');
-$iku = mysqli_query($link, "SELECT * FROM sinori_sakip_iku where id_satker = '".$ar['id_satker']."'");
-$dataiku = array ();
-while (($rowiku = mysqli_fetch_array($iku)) != null){
-$dataiku[] = $rowiku;
-}
-$xnumiku = count ($dataiku);
-if ($xnumiku == "0") {
-print ('<center>-</center>');  
-} 
-else {
-print ('<center><img src="images/centang.png" width="30" height="30"></center>');  
-} 
-print ('</center></td>');
-//-------------
-//DIPA
-print ('<td><center>');
-$dipa = mysqli_query($link, "SELECT * FROM sinori_sakip_dipa where id_satker = '".$ar['id_satker']."'");
-$datadipa = array ();
-while (($rowdipa = mysqli_fetch_array($dipa)) != null){
-$datadipa[] = $rowdipa;
-}
-$xnumdipa = count ($datadipa);
-if ($xnumdipa == "0") {
-print ('<center>-</center>');  
-} 
-else {
-print ('<center><img src="images/centang.png" width="30" height="30"></center>');  
-} 
-print ('</center></td>');
-//-------------
-//REN AKSI
-print ('<td><center>');
-$renaksi = mysqli_query($link, "SELECT * FROM sinori_sakip_renaksi where id_satker = '".$ar['id_satker']."'");
-$datarenaksi = array ();
-while (($rowrenaksi = mysqli_fetch_array($renaksi)) != null){
-$datarenaksi[] = $rowrenaksi;
-}
-$xnumrenaksi = count ($datarenaksi);
-if ($xnumrenaksi == "0") {
-print ('<center>-</center>');  
-} 
-else {
-print ('<center><img src="images/centang.png" width="30" height="30"></center>');  
-} 
-print ('</center></td>');
-//-------------
-//LHE
-print ('<td><center>');
-$lhe = mysqli_query($link, "SELECT * FROM sinori_sakip_lhe where id_satker = '".$ar['id_satker']."'");
-$datalhe = array ();
-while (($rowlhe = mysqli_fetch_array($lhe)) != null){
-$datalhe[] = $rowlhe;
-}
-$xnumlhe = count ($datalhe);
-if ($xnumlhe == "0") {
-print ('<center>-</center>');  
-} 
-else {
-print ('<center><img src="images/centang.png" width="30" height="30"></center>');  
-} 
-print ('</center></td>');
-//-------------
-print ('<td><center><b>LIHAT</b></center></td>'); 
+print ('<td><center><b>-</b></center></td>');
+print ('<td><center><b>-</b></center></td>');  
+print ('<td><center><b>-</b></center></td>');  
+print ('<td><center><b>-</b></center></td>');  
+print ('<td><center><b>-</b></center></td>'); 
 
 //LKJIP
 print ('<td><center>');
-$lakip = mysqli_query($link, "SELECT * FROM sinori_sakip_lakip where id_satker = '".$ar['id_satker']."'");
-$datalakip = array ();
-while (($rowlakip = mysqli_fetch_array($lakip)) != null){
-$datalakip[] = $rowlakip;
-}
-$xnumlakip = count ($datalakip);
-if ($xnumlakip == "0") {
+$lkjip = mysqli_query($link, "SELECT * FROM sinori_login where id_satker = '".$ar['id_satker']."'");
+
+while ($lkjip2=mysqli_fetch_array($lkjip,MYSQLI_ASSOC)){
+if ($lkjip2['id_sakip_lkjip'] == "") {
 print ('<center>-</center>');  
 } 
 else {
-print ('<center><img src="images/centang.png" width="30" height="30"></center>');  
+print ('<center><b>OK</b></center>');  
 } 
+}
+
+
 print ('</center></td>');
 //=---------
+print ('<td><center>');
 
+$kinerja = mysqli_query($link, "SELECT * FROM sinori_sakip_penetapan where id_satker = '".$ar['id_satker']."'");
+$datakinerja = array ();
+while (($rowkinerja = mysqli_fetch_array($kinerja)) != null){
+$datakinerja[] = $rowkinerja;
+}
+echo $xnumkinerja = count ($datakinerja);
 
-
+print ('</center></td>');
 
 }
 echo" </tr>";
@@ -234,7 +175,7 @@ echo "</tbody></table>";
     <td colspan="2">&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="2"><div align="center">Powered by Chendia Studio Jogjakarta 2024</div></td>
+    <td colspan="2"><div align="center">Powered by Chendia Studio Jogjakarta </div></td>
   </tr>
   <tr>
     <td colspan="2">&nbsp;</td>
