@@ -67,11 +67,11 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                             <a class="nav-link btn-info active" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
                         </div>
                     </nav>
-                    <div class='container m-2 p-2 align-content-center'> 
+                    <div class='container m-2 p-2 justify-content-center'> 
 
                     <?php if (mysqli_stmt_fetch($stmt_detil)): ?>
                         <h1 class='text-center'>Detail Satker</h1>
-                        <table class='table table-bordered table'>
+                        <table class='table table-bordered mt-4 table-responsive'>
                             <tr>
                                 <th>Bidang</th>
                                 <th>Sasaran Program</th>

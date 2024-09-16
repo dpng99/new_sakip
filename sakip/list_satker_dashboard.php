@@ -109,14 +109,6 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
             <div class="col-md-6">
                 <input type="text" id="search-input" class="form-control" placeholder="Cari berdasarkan ID atau Nama Satker" oninput="filterData()">
             </div>
-            <div class="col-md-6">
-                <!-- Filter dropdown -->
-                <select id="filter-input" class="form-control" onchange="filterData()">
-                    <option value="">Tampilkan Semua</option>
-                    <option value="withKep">Dengan Keputusan</option>
-                    <option value="withoutKep">Tanpa Keputusan</option>
-                </select>
-            </div>
         </div>
 
         <!-- Table -->
@@ -235,15 +227,12 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
         // Fungsi untuk mencari dan memfilter data
         function filterData() {
             const searchValue = document.getElementById('search-input').value.toLowerCase();
-            const filterValue = document.getElementById('filter-input').value;
 
             // Filter berdasarkan search dan filter dropdown
             filteredData = data.filter(row => {
                 const matchesSearch = row.id_satker.toLowerCase().includes(searchValue) || row.satkernama.toLowerCase().includes(searchValue);
                 
-                const matchesFilter = (filterValue === '') || 
-                                      (filterValue === 'withKep' && row.kep_filesurat) || 
-                                      (filterValue === 'withoutKep' && !row.kep_filesurat);
+    
 
                 return matchesSearch && matchesFilter;
             });
