@@ -27,21 +27,25 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                 $id_satker_url = $_GET['id_satker'];
 
                 // Query to fetch details for the given id_satker (without pagination)
-                $query = "SELECT sl.satkernama, pk.id_target, pk.id_realisasi_tw1, pk.id_realisasi_tw2, 
-                 pk.id_realisasi_tw3, pk.id_realisasi_tw4, sb.bidang_nama, 
-                 sp.saspro_nama, ik.indikator_nama
-                            FROM sinori_login sl
-                            LEFT JOIN sinori_sakip_penetapan pk ON sl.id_satker = pk.id_satker
-                            LEFT JOIN sinori_sakip_bidang sb ON pk.id_bidang = sb.id
-                            LEFT JOIN sinori_sakip_saspro sp ON pk.id_saspro = sp.id
-                            LEFT JOIN sinori_sakip_indikator ik ON pk.id_indikator = ik.id
-                            WHERE sl.id_satker = '$id_satker_url'";
+                $query = "SELECT sl.id_satker, sl.satkernama, pk.id_approved, pk.id_target, pk.id_otentikasi_tw1,
+                                pk.id_otentikasi_tw2, pk.id_otentikasi_tw3, pk.id_otentikasi_tw4,
+                                pk.id_realisasi_tw1, pk.id_realisasi_tw2, pk.id_realisasi_tw3, pk.id_realisasi_tw4, 
+                                sb.bidang_nama, sp.saspro_nama, ik.indikator_nama
+                          FROM sinori_login sl
+                          LEFT JOIN sinori_sakip_penetapan pk ON sl.id_satker = pk.id_satker
+                          LEFT JOIN sinori_sakip_bidang sb ON pk.id_bidang = sb.id
+                          LEFT JOIN sinori_sakip_saspro sp ON pk.id_saspro = sp.id
+                          LEFT JOIN sinori_sakip_indikator ik ON pk.id_indikator = ik.id
+                          WHERE sl.id_satker = ?";
 
-                    $result = mysqli_query($link, $query);
-
-                    if ($result) {
-                        $row = mysqli_fetch_assoc($result);
-                        if ($row) {
+                $stmt_detil = mysqli_prepare($link, $query);
+                if ($stmt_detil) {
+                    mysqli_stmt_bind_param($stmt_detil, "s", $id_satker_url);
+                    mysqli_stmt_execute($stmt_detil);
+                    mysqli_stmt_bind_result($stmt_detil, $id_satker, $satkernama, $id_approved, $id_target,
+                        $id_otentikasi_tw1, $id_otentikasi_tw2, $id_otentikasi_tw3, $id_otentikasi_tw4, $id_realisasi_tw1,
+                        $id_realisasi_tw2, $id_realisasi_tw3, $id_realisasi_tw4,
+                        $bidang_nama, $saspro_nama, $indikator_nama);
                     ?>
                     <!DOCTYPE html>
                     <html lang="en">
@@ -101,12 +105,10 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                     </html>
                     <?php
 
-                    } else {
-                        echo "No records found for Satker ID: " . htmlspecialchars($id_satker_url);
-                    }
-                    } else {
-                    echo "Error executing query: " . mysqli_error($link);
-                    }
+                    mysqli_stmt_close($stmt_detil); // Close the detail statement once done
+                } else {
+                    echo "Error preparing detail query: " . mysqli_error($link);
+                }
             } else {
                 echo "ID Satker not found in URL.";
             }
