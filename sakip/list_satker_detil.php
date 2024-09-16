@@ -70,7 +70,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                     <div class='container m-2 p-2 justify-content-center'> 
 
                     <?php if (mysqli_stmt_fetch($stmt_detil)): ?>
-                        <h1 class='text-center'>Detail Satker</h1>
+                        <h1 class='text-center'>Detail Satker <?=htmlspecialchars($satkernama) ?></h1>
                         <table class='table table-bordered mt-4 table-responsive'>
                             <tr>
                                 <th>Bidang</th>
