@@ -218,6 +218,12 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
             }
         }
 
+        // Fungsi untuk mengganti halaman
+        function changePage(page) {
+            currentPage = page;
+            displayTable(page);
+        }
+
         // Fungsi untuk mencari dan memfilter data
         function filterData() {
             const searchValue = document.getElementById('search-input').value.toLowerCase();
@@ -239,10 +245,12 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
 </html>
 
 
+
 <?php
-                mysqli_close($link);
+              
 
             } else {
+                mysqli_close($link);
                 header("Location: unauthorized.php");
                 exit();
             }

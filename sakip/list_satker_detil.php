@@ -113,14 +113,16 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                 echo "ID Satker not found in URL.";
             }
         } else {
+            mysqli_stmt_close($stmt);
             echo "Invalid session.";
         }
 
-        mysqli_stmt_close($stmt);
+        
     } else {
         echo "Error preparing session validation query: " . mysqli_error($link);
     }
 } else {
+    mysqli_stmt_close($stmt);
     header("Location: index.php?error=invalid_session");
     exit();
 }
