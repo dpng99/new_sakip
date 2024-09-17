@@ -168,7 +168,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                             <a href='list_satker_detil.php?id_satker=${row.id_satker}' class='btn btn-primary'>
                              ${row.status_capaian_kinerja}
                             </a>
-                    </td>
+                        </td>
 
                         <td class='text-center'>${row.iku_satker ? `<a href='view.php?satker=${row.id_satker}&do=iku' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
                         <td class='text-center'>${row.dipa_satker ? `<a href='view.php?satker=${row.id_satker}&do=dipa' target='_blank'><img src='images/centang.png' width='30' height='30'></a>` : '-'}</td>
@@ -218,29 +218,16 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
             }
         }
 
-        // Fungsi untuk mengganti halaman
-        function changePage(page) {
-            currentPage = page;
-            displayTable(page);
-        }
-
         // Fungsi untuk mencari dan memfilter data
         function filterData() {
             const searchValue = document.getElementById('search-input').value.toLowerCase();
-            const filterValue = document.getElementById('filter-input').value;
 
-            // Filter berdasarkan search dan filter dropdown
+            // Filter berdasarkan search input
             filteredData = data.filter(row => {
-                const matchesSearch = row.id_satker.toLowerCase().includes(searchValue) || row.satkernama.toLowerCase().includes(searchValue);
-
-                const matchesFilter = (filterValue === '') || 
-                                      (filterValue === 'withKep' && row.kep_filesurat) || 
-                                      (filterValue === 'withoutKep' && !row.kep_filesurat);
-
-
-                return matchesSearch && matchesFilter;
+                return row.id_satker.toLowerCase().includes(searchValue) || row.satkernama.toLowerCase().includes(searchValue);
             });
-            // Reset ke halaman 1 setiap kali ada pencarian atau filter baru
+
+            // Reset ke halaman 1 setiap kali ada pencarian baru
             currentPage = 1;
             displayTable(currentPage);
         }
