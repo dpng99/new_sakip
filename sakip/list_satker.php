@@ -965,7 +965,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
     Serenata AKIP Kejaksaan RI
     </a>
 
-    <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Dashboard</a>
+    <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Capaian Kinerja</a>
     <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Satuan Kerja</a>
     <a class="nav-link btn btn-info active align-self-end col m-2 btn-sm" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
 
