@@ -1,16 +1,16 @@
 <?PHP
 //DATABASE JAKSa.iD
-/* $server = "localhost"; 
+$server = "localhost"; 
 $username = "panevkejaksaan_prosakip";
 $password = "B,*3EnP]VIFH";
 $database = "panevkejaksaan_prosakip";
-$mytable  = "sinori_login"; */
+$mytable  = "sinori_login";
 
-$server = "localhost"; 
+/* $server = "localhost"; 
 $username = "root";
 $password = "";
 $database = "panevkejaksaan_prosakip";
-//$mytable  = "";
+//$mytable  = ""; */
 $mysqli = new mysqli("$server","$username","$password","$database");
 //$koneksi = mysqli_connect('localhost','root','','tutorial');
 //$mysqli = mysqli_connect("$server","$username","$password","$database");
