@@ -227,16 +227,19 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
         // Fungsi untuk mencari dan memfilter data
         function filterData() {
             const searchValue = document.getElementById('search-input').value.toLowerCase();
+            const filterValue = document.getElementById('filter-input').value;
 
             // Filter berdasarkan search dan filter dropdown
             filteredData = data.filter(row => {
                 const matchesSearch = row.id_satker.toLowerCase().includes(searchValue) || row.satkernama.toLowerCase().includes(searchValue);
-                
-    
+
+                const matchesFilter = (filterValue === '') || 
+                                      (filterValue === 'withKep' && row.kep_filesurat) || 
+                                      (filterValue === 'withoutKep' && !row.kep_filesurat);
+
 
                 return matchesSearch && matchesFilter;
             });
-
             // Reset ke halaman 1 setiap kali ada pencarian atau filter baru
             currentPage = 1;
             displayTable(currentPage);
