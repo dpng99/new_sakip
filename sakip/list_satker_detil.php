@@ -77,10 +77,10 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                                 <th>Sasaran Program</th>
                                 <th>Indikator</th>
                                 <th>Target</th>
-                                <th>Status Realisasi TW1</th>
-                                <th>Status Realisasi TW2</th>
-                                <th>Status Realisasi TW3</th>
-                                <th>Status Realisasi TW4</th>
+                                <th>Capaian TW1</th>
+                                <th>Capaian TW2</th>
+                                <th>Capaian TW3</th>
+                                <th>Capaian TW4</th>
                             </tr>
                             <?php
                             do {

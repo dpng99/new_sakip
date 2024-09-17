@@ -414,7 +414,7 @@ function renderAverages2($data) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Profesionalisme Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -430,7 +430,7 @@ function renderAverages2($data) {
     echo "<tbody>";
     echo "<tr>";
     
-    // Sasaran strategis dan target
+    // Indikator Kinerja Utama dan target
     echo "<td> 1. Meningkatnya Profesionalisme Aparatur Kejaksaan RI</td>";
     echo "<td>90</td>"; // Target nilai
     
@@ -453,7 +453,7 @@ function renderAverages3($data) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Terwujudnya Upaya Pencegahan Tindak Pidana Korupsi</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -466,7 +466,7 @@ function renderAverages3($data) {
     </tr>"; // Sub-header
     echo "</thead>";
     
-    // Render row for the specific Sasaran Strategis and the TW averages
+    // Render row for the specific Indikator Kinerja Utama and the TW averages
     echo "<tbody>";
     echo "<tr>";
     echo "<td> 3. Terwujudnya Upaya Pencegahan Tindak Pidana Korupsi </td>"; // Description of the strategic goal
@@ -488,7 +488,7 @@ function renderAverages4($data) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Terwujudnya Optimalisasi Kinerja Aparatur Kejaksaan </h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -501,7 +501,7 @@ function renderAverages4($data) {
     </tr>"; // Sub-header
     echo "</thead>";
     
-    // Render row for the specific Sasaran Strategis and the TW averages
+    // Render row for the specific Indikator Kinerja Utama and the TW averages
     
     echo "<tbody>";
     echo "<tr>";
@@ -530,7 +530,7 @@ function renderAveragesForParts($part1, $part2, $part3) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Akuntabilitas dan Integritas Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -543,7 +543,7 @@ function renderAveragesForParts($part1, $part2, $part3) {
     </tr>"; // Sub-header
     echo "</thead>";
     
-    // Render row for the specific Sasaran Strategis and the TW averages
+    // Render row for the specific Indikator Kinerja Utama and the TW averages
     echo "<tbody>";
     echo "<tr>";
     echo "<td> 2.1 Persentase Nilai SPIP Kejaksaan RI </td>";
@@ -591,7 +591,7 @@ function renderAveragesForParts2($part1, $part2) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Keberhasilan Penyelesaian Perkara Tindak Pidana</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -604,7 +604,7 @@ function renderAveragesForParts2($part1, $part2) {
     </tr>"; // Sub-header
     echo "</thead>";
     
-    // Render row for the specific Sasaran Strategis and the TW averages
+    // Render row for the specific Indikator Kinerja Utama and the TW averages
     echo "<tbody>";
     echo "<tr>";
     echo "<td> 4.1 Persentase penyelesaian Perkara Tindak Pidana Umum yang mempunyai kekuatan hukum tetap dan telah dieksekusi </td>"; // Description of the strategic goal
@@ -639,7 +639,7 @@ function renderAveragesForParts3($part1, $part2) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Profesionalisme Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Sasaran Strategis</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -652,7 +652,7 @@ function renderAveragesForParts3($part1, $part2) {
     </tr>"; // Sub-header
     echo "</thead>";
     
-    // Render row for the specific Sasaran Strategis and the TW averages
+    // Render row for the specific Indikator Kinerja Utama and the TW averages
     echo "<tbody>";
     echo "<tr>";
     echo "<td> 5.1 Persentase penyelamatan dan pengembalian kerugian negara melalui jalur pidana</td>"; // Description of the strategic goal
