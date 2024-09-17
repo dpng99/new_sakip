@@ -964,7 +964,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
     <img src="images/logo_kejaksaan.png" alt="Logo Kejaksaan RI" width="50"/>
     Serenata AKIP Kejaksaan RI
     </a>
-    <a class="nav-link btn-info active" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Dashboard</a>
+    <a class="nav-link btn-info active" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Satuan Kerja</a>
     <a class="nav-link btn-info active" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
     </div>
 </nav>
@@ -1001,8 +1001,8 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
         <option value="all">Semua Triwulan</option>
         <option value="1">Triwulan 1 (TW1)</option>
         <option value="2">Triwulan 2 (TW2)</option>
-        <option value="3">Triwulan 3 (TW3)</option>
-        <option value="4">Triwulan 4 (TW4)</option>
+<!--         <option value="3">Triwulan 3 (TW3)</option>
+        <option value="4">Triwulan 4 (TW4)</option> -->
     </select>
 </div>
 <!-- Render averages for each indicator -->

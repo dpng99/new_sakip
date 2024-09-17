@@ -102,7 +102,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
     </div>
 </nav>
     <div class="container">
-        <h2 class="text-center mt-4">Data Rencana Kinerja Satuan Kerja Kejaksaan RI</h2>
+        <h2 class="text-center mt-4">Data Pelaksanaan SAKIP di Lingkungan Kejaksaan RI</h2>
 
         <!-- Search Input -->
         <div class="row mb-3">
