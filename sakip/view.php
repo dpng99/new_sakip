@@ -247,8 +247,9 @@ if ($do1 == "dipa"){
   <table id="myTable" cellspacing="1" width="100%" align="center" cellpadding="3" bgcolor="#FFCC00" ><thead>
   <tr bgcolor="#FFCC00">
   <td width="5%"><center>No</center></td>
-  <td width="45%">Tahun Renja - File</td>
+  <td width="45%">Tahun DIPA - File</td>
   <td width="10%"><center>Versi</center></td>
+  <td width="10%"><center>Pagu</center></td>
   <td width="40%">Tgl Upload</td>
   </tr>
   </thead><tbody>
@@ -263,6 +264,7 @@ if ($do1 == "dipa"){
   print ('<td ><center>'.$no++.'<center></td>');
   print (' <td ><a href="http://panev.kejaksaan.go.id/sakip/repository/'.$idsatker1.'/'.$ar['id_filename'].'" target="_blank">'.$ar['id_periode'].'</a></td>');
   print (' <td ><center>'.$ar['id_perubahan'].'</center></td>');
+  print ('<td><center>'.$ar['id_pagu'].'</center></td>');
   print (' <td >'.$ar['id_tglupload'].'</td>');
   
   }
