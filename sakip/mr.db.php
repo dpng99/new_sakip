@@ -5,7 +5,6 @@ $username = "panevkejaksaan_prosakip";
 $password = "B,*3EnP]VIFH";
 $database = "panevkejaksaan_prosakip";
 $mytable  = "sinori_login";
-
 /* $server = "localhost"; 
 $username = "root";
 $password = "";
