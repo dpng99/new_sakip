@@ -27,10 +27,9 @@ include("index.globalconfig.php");
 </head>
 <body>
 <?php
-$pt = 'themes/';  //folder where you put your BGs       
-$bg = array($pt.'bg_1.jpg', $pt.'bg_2.jpg', $pt.'bg_3.jpg' ); // array of filenames
+
 ?>
-<div class="container-contact100" style="background-image: url('<?php echo $bg[array_rand($bg)]; ?>');">
+<div class="container-contact100" style="background-image: url('images/GTRFG.png');">
 
 		<div class="wrap-contact100"><center><?PHP echo $satker; ?><br><br><img src="themes/kejaksaan.png" width="150" height="165"><br><br>
 <form name="form1" method="POST" action="index.auth.php">

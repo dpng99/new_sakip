@@ -717,7 +717,7 @@ function renderTable($data, $tableId) {
             $target = isset($row['id_target']) ? $row['id_target'] : 0;
 
             $latestTW = max($tw1, $tw2, $tw3, $tw4);
-            $verification = ($latestTW < $target) ? "Tidak Tercapai" : "Tercapai";
+            $verification = ($latestTW < $target) ? "Belum Tercapai" : "Tercapai";
             $color = ($verification === "Tercapai") ? "green" : "red";    
 
             echo "<tr>";

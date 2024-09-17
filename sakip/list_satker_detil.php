@@ -65,8 +65,8 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                         Serenata AKIP Kejaksaan RI
                         </a>
                         <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Capaian Kinerja</a>
-    <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Satuan Kerja</a>
-    <a class="nav-link btn btn-info active align-self-end col m-2 btn-sm" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
+                        <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Satuan Kerja</a>
+                        <a class="nav-link btn btn-info active align-self-end col m-2 btn-sm" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
                         </div>
                     </nav>
                     <div class='container m-2 p-2 align-content-center'> 
@@ -83,9 +83,15 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                                 <th>Capaian TW2</th>
                                 <th>Capaian TW3</th>
                                 <th>Capaian TW4</th>
+                                <th>Status Capaian</th>
                             </tr>
                             <?php
                             do {
+
+                                $latestTW = max($id_realisasi_tw1, $id_realisasi_tw2, $id_realisasi_tw3, $id_realisasi_tw4);
+                                $verification = ($latestTW < $id_target) ? "Belum Tercapai" : "Tercapai";
+                                $color = ($verification === "Tercapai") ? "green" : "red";    
+
                                 echo "<tr>";
                                 echo "<td class = 'text-center'>" . htmlspecialchars($bidang_nama) . "</td>";
                                 echo "<td class = 'text-center'>" . htmlspecialchars($saspro_nama) . "</td>";
@@ -95,6 +101,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                                 echo "<td class = 'text-center'>" . htmlspecialchars($id_realisasi_tw2) . "</td>";
                                 echo "<td class = 'text-center'>" . htmlspecialchars($id_realisasi_tw3) . "</td>";
                                 echo "<td class = 'text-center'>" . htmlspecialchars($id_realisasi_tw4) . "</td>";
+                                echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
                                 echo "</tr>";
                             } while (mysqli_stmt_fetch($stmt_detil));
                             ?>
