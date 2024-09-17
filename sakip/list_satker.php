@@ -402,10 +402,12 @@ function renderAverages($data) {
     echo "<table class='table table-bordered'>";
     echo "<thead><tr><th>Triwulan</th><th>Rata-rata</th></tr></thead>";
     echo "<tbody>";
+    
     echo "<tr><td>TW1</td><td>" . number_format($averages['tw1_avg'], 2) . "</td></tr>";
     echo "<tr><td>TW2</td><td>" . number_format($averages['tw2_avg'], 2) . "</td></tr>";
     echo "<tr><td>TW3</td><td>" . number_format($averages['tw3_avg'], 2) . "</td></tr>";
     echo "<tr><td>TW4</td><td>" . number_format($averages['tw4_avg'], 2) . "</td></tr>";
+    
     echo "</tbody></table>";
 }
 
@@ -414,7 +416,7 @@ function renderAverages2($data) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Profesionalisme Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -424,6 +426,7 @@ function renderAverages2($data) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
+    <th >Status Capaiant</th>
     </tr>"; // Sub-header
     echo "</thead>";
     
@@ -433,7 +436,9 @@ function renderAverages2($data) {
     // Indikator Kinerja Utama dan target
     echo "<td>Persentase Aparatur Kejaksaan RI yang Memiliki Sertifikat Kompentensi dan atau Keahlian</td>";
     echo "<td>90</td>"; // Target nilai
-    
+    $latestTW = max($averages['tw1_real_avg'] ,$averages['tw2_real_avg'], $averages['tw3_real_avg'], $averages['tw4_real_avg']);
+                                $verification = ($latestTW < 90) ? "Belum Tercapai" : "Tercapai";
+                                $color = ($verification === "Tercapai") ? "green" : "red";    
     // Nilai rata-rata untuk setiap triwulan dengan data-* untuk JavaScript
     echo "<td data-tw='1'>" . number_format($averages['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages['tw1_real_avg'], 2) . "</td>";
@@ -443,6 +448,7 @@ function renderAverages2($data) {
     echo "<td data-tw='3'>" . number_format($averages['tw3_real_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages['tw4_real_avg'], 2) . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     echo "</tbody>";    
     echo "</table>";
@@ -453,7 +459,7 @@ function renderAverages3($data) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Terwujudnya Upaya Pencegahan Tindak Pidana Korupsi</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -463,9 +469,12 @@ function renderAverages3($data) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
+    <th >Status Capaiant</th>
     </tr>"; // Sub-header
     echo "</thead>";
-    
+    $latestTW = max($averages['tw1_real_avg'] ,$averages['tw2_real_avg'], $averages['tw3_real_avg'], $averages['tw4_real_avg']);
+    $verification = ($latestTW < 90) ? "Belum Tercapai" : "Tercapai";
+    $color = ($verification === "Tercapai") ? "green" : "red"; 
     // Render row for the specific Indikator Kinerja Utama and the TW averages
     echo "<tbody>";
     echo "<tr>";
@@ -479,6 +488,7 @@ function renderAverages3($data) {
     echo "<td data-tw='3'>" . number_format($averages['tw3_real_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages['tw4_real_avg'], 2) . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     echo "</tbody>";
     echo "</table>";
@@ -488,7 +498,7 @@ function renderAverages4($data) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Terwujudnya Optimalisasi Kinerja Aparatur Kejaksaan </h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -498,11 +508,14 @@ function renderAverages4($data) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
+    <th >Status Capaiant</th>
     </tr>"; // Sub-header
     echo "</thead>";
     
     // Render row for the specific Indikator Kinerja Utama and the TW averages
-    
+    $latestTW = max($averages['tw1_real_avg'] ,$averages['tw2_real_avg'], $averages['tw3_real_avg'], $averages['tw4_real_avg']);
+    $verification = ($latestTW < 75) ? "Belum Tercapai" : "Tercapai";
+    $color = ($verification === "Tercapai") ? "green" : "red"; 
     echo "<tbody>";
     echo "<tr>";
     echo "<td> 6. Persentase Satuan Kerja Kejaksaan RI yang berhasil menerapkan Sarana dan Prasarana berbasis Teknologi Informasi</td>";
@@ -515,6 +528,7 @@ function renderAverages4($data) {
     echo "<td data-tw='3'>" . number_format($averages['tw3_real_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages['tw4_real_avg'], 2) . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     echo "</tbody>";
     echo "</table>";
@@ -530,7 +544,7 @@ function renderAveragesForParts($part1, $part2, $part3) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Akuntabilitas dan Integritas Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -540,10 +554,14 @@ function renderAveragesForParts($part1, $part2, $part3) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
+    <th >Status Capaiant</th>
     </tr>"; // Sub-header
     echo "</thead>";
     
     // Render row for the specific Indikator Kinerja Utama and the TW averages
+    $latestTW1 = max($averages1['tw1_real_avg'] ,$averages1['tw2_real_avg'], $averages1['tw3_real_avg'], $averages1['tw4_real_avg']);
+    $verification = ($latestTW1 < 100) ? "Belum Tercapai" : "Tercapai";
+    $color = ($verification === "Tercapai") ? "green" : "red"; 
     echo "<tbody>";
     echo "<tr>";
     echo "<td> 2.1 Persentase Nilai SPIP Kejaksaan RI </td>";
@@ -556,8 +574,12 @@ function renderAveragesForParts($part1, $part2, $part3) {
     echo "<td data-tw='3'>" . number_format($averages1['tw3_real_avg'], 2)*25 . "</td>";
     echo "<td data-tw='4'>" . number_format($averageutama1['tw4_avg'], 2)*25 . "</td>";
     echo "<td data-tw='4'>" . number_format($averages1['tw4_real_avg'], 2)*25 . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     "<tr>";
+    $latestTW2 = max($averages2['tw1_real_avg'] ,$averages2['tw2_real_avg'], $averages2['tw3_real_avg'], $averages2['tw4_real_avg']);
+    $verification = ($latestTW2 < 95) ? "Belum Tercapai" : "Tercapai";
+    $color = ($verification === "Tercapai") ? "green" : "red"; 
     echo "<td> 2.2 Persentase Nilai SAKIP Kejaksaan RI </td>"; // Description of the strategic goal
     echo "<td>95</td>"; 
     echo "<td data-tw='1'>" . number_format($averageutama2['tw1_avg'], 2) . "</td>";
@@ -568,9 +590,13 @@ function renderAveragesForParts($part1, $part2, $part3) {
     echo "<td data-tw='3'>" . number_format($averages2['tw3_real_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averageutama2['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages2['tw4_real_avg'], 2) . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     echo "</tbody>";
     "<tr>";
+    $latestTW3 = max($averages3['tw1_real_avg'] ,$averages3['tw2_real_avg'], $averages3['tw3_real_avg'], $averages3['tw4_real_avg']);
+    $verification = ($latestTW3 < 90) ? "Belum Tercapai" : "Tercapai";
+    $color = ($verification === "Tercapai") ? "green" : "red"; 
     echo "<td> 2.3 Persentase Berkurangnya Laporan Pengaduan Masyarakat terhadap Aparatur Kejaksaan RI </td>"; // Description of the strategic goal
     echo "<td>90</td>"; 
     echo "<td data-tw='1'>" . number_format($averageutama3['tw1_avg'], 2) . "</td>";
@@ -581,6 +607,7 @@ function renderAveragesForParts($part1, $part2, $part3) {
     echo "<td data-tw='3'>" . number_format($averages3['tw3_real_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averageutama3['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages3['tw4_real_avg'], 2) . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     echo "</tbody>";
     echo "</table>";
@@ -591,7 +618,7 @@ function renderAveragesForParts2($part1, $part2) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Keberhasilan Penyelesaian Perkara Tindak Pidana</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -601,9 +628,12 @@ function renderAveragesForParts2($part1, $part2) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
+    <th >Status Capaiant</th>
     </tr>"; // Sub-header
     echo "</thead>";
-    
+    $latestTW1 = max($averages1['tw1_real_avg'] ,$averages1['tw2_real_avg'], $averages1['tw3_real_avg'], $averages1['tw4_real_avg']);
+    $verification = ($latestTW1 < 99) ? "Belum Tercapai" : "Tercapai";
+    $color = ($verification === "Tercapai") ? "green" : "red"; 
     // Render row for the specific Indikator Kinerja Utama and the TW averages
     echo "<tbody>";
     echo "<tr>";
@@ -617,8 +647,12 @@ function renderAveragesForParts2($part1, $part2) {
     echo "<td data-tw='3'>" . number_format($averages1['tw3_real_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages1['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages1['tw4_real_avg'], 2) . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
    echo "<tr>";
+   $latestTW2 = max($averages2['tw1_real_avg'] ,$averages2['tw2_real_avg'], $averages2['tw3_real_avg'], $averages2['tw4_real_avg']);
+    $verification = ($latestTW2 < 100) ? "Belum Tercapai" : "Tercapai";
+    $color = ($verification === "Tercapai") ? "green" : "red"; 
     echo "<td> 4.2 Persentase penyelesaian Perkara Tindak Pidana Khusus yang mempunyai kekuatan hukum tetap dan telah dieksekusi </td>"; // Description of the strategic goal
     echo '<td>90</td>';
     echo "<td data-tw='1'>" . number_format($averages2['tw1_avg'], 2) . "</td>";
@@ -629,6 +663,7 @@ function renderAveragesForParts2($part1, $part2) {
     echo "<td data-tw='3'>" . number_format($averages2['tw3_real_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages2['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages2['tw4_real_avg'], 2) . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     echo "</tbody>";
     echo "</table>";
@@ -639,7 +674,7 @@ function renderAveragesForParts3($part1, $part2) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Profesionalisme Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='8'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -649,10 +684,14 @@ function renderAveragesForParts3($part1, $part2) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
+    <th >Status Capaiant</th>
     </tr>"; // Sub-header
     echo "</thead>";
     
     // Render row for the specific Indikator Kinerja Utama and the TW averages
+    $latestTW1 = max($averages1['tw1_real_avg'] ,$averages1['tw2_real_avg'], $averages1['tw3_real_avg'], $averages1['tw4_real_avg']);
+    $verification = ($latestTW1 < 85) ? "Belum Tercapai" : "Tercapai";
+    $color = ($verification === "Tercapai") ? "green" : "red"; 
     echo "<tbody>";
     echo "<tr>";
     echo "<td> 5.1 Persentase penyelamatan dan pengembalian kerugian negara melalui jalur pidana</td>"; // Description of the strategic goal
@@ -665,8 +704,12 @@ function renderAveragesForParts3($part1, $part2) {
     echo "<td data-tw='3'>" . number_format($averages1['tw3_real_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages1['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages1['tw4_real_avg'], 2) . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     "<tr>";
+    $latestTW2 = max($averages2['tw1_real_avg'] ,$averages2['tw2_real_avg'], $averages2['tw3_real_avg'], $averages2['tw4_real_avg']);
+    $verification = ($latestTW2 < 85) ? "Belum Tercapai" : "Tercapai";
+    $color = ($verification === "Tercapai") ? "green" : "red"; 
     echo "<td> 5.2 Persentase penyelamatan dan pengembalian kerugian negara melalui jalur perdata</td>"; // Description of the strategic goal
     echo '<td>85</td>S';
     echo "<td data-tw='1'>" . number_format($averages2['tw1_avg'], 2) . "</td>";
@@ -677,6 +720,7 @@ function renderAveragesForParts3($part1, $part2) {
     echo "<td data-tw='3'>" . number_format($averages2['tw3_real_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages2['tw4_avg'], 2) . "</td>";
     echo "<td data-tw='4'>" . number_format($averages2['tw4_real_avg'], 2) . "</td>";
+    echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     echo "</tbody>";
 }
