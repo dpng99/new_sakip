@@ -511,7 +511,6 @@ function renderAverages4($data) {
     <th >Status Capaiant</th>
     </tr>"; // Sub-header
     echo "</thead>";
-    
     // Render row for the specific Indikator Kinerja Utama and the TW averages
     $latestTW = max($averages['tw1_real_avg'] ,$averages['tw2_real_avg'], $averages['tw3_real_avg'], $averages['tw4_real_avg']);
     $verification = ($latestTW < 75) ? "Belum Tercapai" : "Tercapai";
@@ -1055,62 +1054,48 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 <!-- Render averages for each indicator -->
 
 <!-- Table and averages for each indicator -->
-<div class="averages-container visually-hidden" id="averages-container-1">
-        
-        <?php renderAverages2($data_indikator1); ?>
-    </div>
+
 <?php if($user == '888881') : ?>
 <div class="table-container visually-hidden" id="table-container-1">
         <?php renderTable($data_indikator1, 'data_indikator1'); ?>
     </div>
- <?php endif;  ?> 
-<div class="averages-container visually-hidden" id="averages-container-2">
-
-        <?php renderAveragesForParts($data_indikator2_part1, $data_indikator2_part2, $data_indikator2_part3); ?>
+    <div class="table-container visually-hidden" id="table-container-6" >
+<?php renderTable($data_indikator6, 'data_indikator6'); ?>
 </div>
-<?php if($user == '888881') : ?>
 <div class="table-container visually-hidden" id="table-container-2">
         <?php renderTable($data_indikator2, 'data_indikator2'); ?>
-
 </div>
-<?php endif;  ?> 
-<div class="averages-container visually-hidden" id="averages-container-3">
-
-<?php renderAverages3($data_indikator3); ?>
-</div>
-<?php if($user == '888881') : ?>
 <div class="table-container visually-hidden" id="table-container-3">
         <?php renderTable($data_indikator3, 'data_indikator3'); ?>
 </div>
-<?php endif;  ?> 
-<div class="averages-container visually-hidden" id="averages-container-4">
-
-<?php renderAveragesForParts2($data_indikator4_part1, $data_indikator4_part2); ?>
-</div>
-<?php if($user == '888881') : ?>
 <div class="table-container visually-hidden" id="table-container-4" >
         <?php renderTable($data_indikator4, 'data_indikator4'); ?>
 </div>
-<?php endif;  ?> 
+<div class="table-container visually-hidden" id="table-container-5" >
+<?php renderTable($data_indikator5, 'data_indikator5'); ?>
+</div>
+ <?php endif;  ?> 
+<div class="averages-container visually-hidden" id="averages-container-1">
+<?php renderAverages2($data_indikator1); ?>
+</div>
+<div class="averages-container visually-hidden" id="averages-container-2">
+<?php renderAveragesForParts($data_indikator2_part1, $data_indikator2_part2, $data_indikator2_part3); ?>
+</div>
+<div class="averages-container visually-hidden" id="averages-container-3">
+<?php renderAverages3($data_indikator3); ?>
+</div>
+<div class="averages-container visually-hidden" id="averages-container-4">
+<?php renderAveragesForParts2($data_indikator4_part1, $data_indikator4_part2); ?>
+</div>
 <div class="averages-container visually-hidden" id="averages-container-5">
-
 <?php renderAveragesForParts3($data_indikator5_part1, $data_indikator5_part2); ?>
 </div>
-<?php if($user == '888881') : ?>
-<div class="table-container visually-hidden" id="table-container-5" >
-        <?php renderTable($data_indikator5, 'data_indikator5'); ?>
-
-</div>
-<?php endif;  ?> 
 <div class="averages-container visually-hidden" id="averages-container-6">
-
 <?php renderAverages4($data_indikator6); ?>
 </div>
-<?php if($user == '888881') : ?>
-<div class="table-container visually-hidden" id="table-container-6" >
-        <?php renderTable($data_indikator6, 'data_indikator6'); ?>
-</div>
-<?php endif;  ?> 
+
+
+
 <!-- Pagination Controls -->
 <div class="pagination m-2 p-2 justify-content-center "></div>
 
