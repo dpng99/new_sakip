@@ -673,7 +673,7 @@ function renderAveragesForParts3($part1, $part2) {
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Profesionalisme Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
+    echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
     <th data-tw='1'>Capaian TW1 Terhadap Target</th>
@@ -722,6 +722,7 @@ function renderAveragesForParts3($part1, $part2) {
     echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     echo "</tbody>";
+    echo "</table>";
 }
 // Render averages for data_indikator2 and its parts
 
