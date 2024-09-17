@@ -959,14 +959,16 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 </head>
 <body>
 <nav class="navbar navbar-light bg-warning-subtle mb-2 p-1 nav">
-    <div class="container">
+    <div class="container col">
     <a class="navbar-brand">
-    <img src="images/logo_kejaksaan.png" alt="Logo Kejaksaan RI" width="50"/>
+    <img src="images/logo_kejaksaan.png" alt="Logo Kejaksaan RI" width="50" />
     Serenata AKIP Kejaksaan RI
     </a>
-    <a class="nav-link btn-info active" href="list_satker.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Dashboard</a>
-    <a class="nav-link btn-info active" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Satuan Kerja</a>
-    <a class="nav-link btn-info active" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
+
+    <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Dashboard</a>
+    <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Satuan Kerja</a>
+    <a class="nav-link btn btn-info active align-self-end col m-2 btn-sm" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
+
     </div>
 </nav>
 

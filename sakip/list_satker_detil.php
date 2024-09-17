@@ -64,9 +64,9 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                         <img src="images/logo_kejaksaan.png" alt="Logo Kejaksaan RI" width="50"/>
                         Serenata AKIP Kejaksaan RI
                         </a>
-                        <a class="nav-link btn-info active" href="list_satker.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Dashboard</a>
-                        <a class="nav-link btn-info active" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Satuan Kerja</a>
-                        <a class="nav-link btn-info active" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
+                        <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Dashboard</a>
+    <a class="nav-link btn btn-info active col m-2 btn-sm" href="list_satker_dashboard.php?&session=<?php echo $session_pass; ?>&idsatker=<?php echo $session_id; ?>">Data Satuan Kerja</a>
+    <a class="nav-link btn btn-info active align-self-end col m-2 btn-sm" href="index.logout.php?g=proses6&i=mr&session=<?PHP echo $session_pass; ?>&idsatker=<?PHP echo $session_id; ?>">Logout</a>
                         </div>
                     </nav>
                     <div class='container m-2 p-2 align-content-center'> 
