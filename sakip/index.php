@@ -29,7 +29,7 @@ include("index.globalconfig.php");
 <?php
 
 ?>
-<div class="container-contact100" style="background-image: url('images/GTRFG.png');">
+<div class="container-contact100" style="background-image: url('images/birocan3.jpg');">
 
 		<div class="wrap-contact100"><center><?PHP echo $satker; ?><br><br><img src="themes/kejaksaan.png" width="150" height="165"><br><br>
 <form name="form1" method="POST" action="index.auth.php">

@@ -218,14 +218,14 @@ function computeAverages2($data) {
     $tw4_avg = $count > 0 ? ($tw4_sum / $count) : 0;
 
     return [
-        'tw1_avg' => $tw1_avg,
-        'tw1_real_avg' => $tw1_avg > 0 ? ($tw1_avg/100) * 100 : 0,
-        'tw2_avg' => $tw2_avg,
-        'tw2_real_avg' => $tw2_avg > 0 ? ($tw2_avg/100) * 100 : 0,
-        'tw3_avg' => $tw3_avg,
-        'tw3_real_avg' => $tw3_avg > 0 ? ($tw3_avg/100) * 100 : 0,
-        'tw4_avg' => $tw4_avg,
-        'tw4_real_avg' => $tw4_avg > 0 ? ($tw4_avg/100) * 100 : 0,
+        'tw1_avg' => $tw1_avg*25,
+        'tw1_real_avg' => $tw1_avg > 0 ? (($tw1_avg/100) * 100)*25 : 0,
+        'tw2_avg' => $tw2_avg*25,
+        'tw2_real_avg' => $tw2_avg > 0 ? (($tw2_avg/100) * 100)*25 : 0,
+        'tw3_avg' => $tw3_avg*25,
+        'tw3_real_avg' => $tw3_avg > 0 ? (($tw3_avg/100) * 100)*25 : 0,
+        'tw4_avg' => $tw4_avg*25,
+        'tw4_real_avg' => $tw4_avg > 0 ? (($tw4_avg/100) * 100)*25 : 0,
     ];
 }
 function computeAverages3($data) {
@@ -415,7 +415,7 @@ function renderAverages2($data) {
     $averages = computeAverages($data);  // Menghitung rata-rata untuk setiap TW
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Profesionalisme Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
-    echo "<thead>";
+    echo "<thead class = 'table-color:yellow'";
     echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
@@ -426,7 +426,7 @@ function renderAverages2($data) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
-    <th >Status Capaiant</th>
+    <th >Status Capaian</th>
     </tr>"; // Sub-header
     echo "</thead>";
     
@@ -469,7 +469,7 @@ function renderAverages3($data) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
-    <th >Status Capaiant</th>
+    <th >Status Capaian</th>
     </tr>"; // Sub-header
     echo "</thead>";
     $latestTW = max($averages['tw1_real_avg'] ,$averages['tw2_real_avg'], $averages['tw3_real_avg'], $averages['tw4_real_avg']);
@@ -508,7 +508,7 @@ function renderAverages4($data) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
-    <th >Status Capaiant</th>
+    <th >Status Capaian</th>
     </tr>"; // Sub-header
     echo "</thead>";
     // Render row for the specific Indikator Kinerja Utama and the TW averages
@@ -553,7 +553,7 @@ function renderAveragesForParts($part1, $part2, $part3) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
-    <th >Status Capaiant</th>
+    <th >Status Capaian</th>
     </tr>"; // Sub-header
     echo "</thead>";
     
@@ -565,14 +565,14 @@ function renderAveragesForParts($part1, $part2, $part3) {
     echo "<tr>";
     echo "<td> 2.1 Persentase Nilai SPIP Kejaksaan RI </td>";
     echo "<td>100</td>"; // Description of the strategic goal
-    echo "<td data-tw='1'>" . number_format($averageutama1['tw1_avg'], 2)*25 . "</td>";
-    echo "<td data-tw='1'>" . number_format($averages1['tw1_real_avg'], 2)*25 . "</td>";
-    echo "<td data-tw='2'>" . number_format($averageutama1['tw2_avg'], 2)*25 . "</td>";
-    echo "<td data-tw='2'>" . number_format($averages1['tw2_real_avg'], 2)*25 . "</td>";
-    echo "<td data-tw='3'>" . number_format($averageutama1['tw3_avg'], 2)*25 . "</td>";
-    echo "<td data-tw='3'>" . number_format($averages1['tw3_real_avg'], 2)*25 . "</td>";
-    echo "<td data-tw='4'>" . number_format($averageutama1['tw4_avg'], 2)*25 . "</td>";
-    echo "<td data-tw='4'>" . number_format($averages1['tw4_real_avg'], 2)*25 . "</td>";
+    echo "<td data-tw='1'>" . number_format($averages1['tw1_avg'], 2) . "</td>";
+    echo "<td data-tw='1'>" . number_format($averages1['tw1_real_avg'], 2) . "</td>";
+    echo "<td data-tw='2'>" . number_format($averages1['tw2_avg'], 2) . "</td>";
+    echo "<td data-tw='2'>" . number_format($averages1['tw2_real_avg'], 2) . "</td>";
+    echo "<td data-tw='3'>" . number_format($averages1['tw3_avg'], 2) . "</td>";
+    echo "<td data-tw='3'>" . number_format($averages1['tw3_real_avg'], 2) . "</td>";
+    echo "<td data-tw='4'>" . number_format($averages1['tw4_avg'], 2) . "</td>";
+    echo "<td data-tw='4'>" . number_format($averages1['tw4_real_avg'], 2) . "</td>";
     echo "<td style='color: $color; font-weight: bold;'>{$verification}</td>";
     echo "</tr>";
     "<tr>";
@@ -627,7 +627,7 @@ function renderAveragesForParts2($part1, $part2) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
-    <th >Status Capaiant</th>
+    <th >Status Capaian</th>
     </tr>"; // Sub-header
     echo "</thead>";
     $latestTW1 = max($averages1['tw1_real_avg'] ,$averages1['tw2_real_avg'], $averages1['tw3_real_avg'], $averages1['tw4_real_avg']);
@@ -683,7 +683,7 @@ function renderAveragesForParts3($part1, $part2) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
-    <th >Status Capaiant</th>
+    <th >Status Capaian </th>
     </tr>"; // Sub-header
     echo "</thead>";
     
