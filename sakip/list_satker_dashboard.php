@@ -113,7 +113,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
 
         <!-- Table -->
         <table class="table table-bordered mt-4 table-responsive">
-            <thead class="thead-dark">
+            <thead class="table-dark">
                 <tr>
                     <th>No</th>
                     <th class='text-center'>ID Satker</th>

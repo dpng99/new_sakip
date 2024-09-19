@@ -51,7 +51,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
 
                 if (!$hmpun_stker) {
                     die("Query Error: " . mysqli_error($db));
-                }
+                }   
 
             // Arrays to store data
             $data_indikator1 = array();
@@ -400,7 +400,7 @@ function renderAverages($data) {
     $averages = computeAverages1($data);
     echo "Persentase Rata -  rata Seluruh capaian Kinerja";
     echo "<table class='table table-bordered'>";
-    echo "<thead><tr><th>Triwulan</th><th>Rata-rata</th></tr></thead>";
+    echo "<thead class = 'table-dark'><tr><th>Triwulan</th><th>Rata-rata</th></tr></thead>";
     echo "<tbody>";
     
     echo "<tr><td>TW1</td><td>" . number_format($averages['tw1_avg'], 2) . "</td></tr>";
@@ -415,7 +415,7 @@ function renderAverages2($data) {
     $averages = computeAverages($data);  // Menghitung rata-rata untuk setiap TW
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Profesionalisme Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
-    echo "<thead class = 'table-color:yellow'";
+    echo "<thead class = 'table-dark'>";
     echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
@@ -426,7 +426,7 @@ function renderAverages2($data) {
     <th data-tw='3'>Capaian TW3 Terhadap Target</th>
     <th data-tw='4'>TW4</th>
     <th data-tw='4'>Capaian TW4 Terhadap Target</th>
-    <th >Status Capaian</th>
+    <th>Status Capaian</th>
     </tr>"; // Sub-header
     echo "</thead>";
     
@@ -458,7 +458,7 @@ function renderAverages3($data) {
     $averages = computeAverages($data);
     echo "<h2 class = 'display-font-sizes-1 text-center'>Terwujudnya Upaya Pencegahan Tindak Pidana Korupsi</h2>";
     echo "<table class='table table-bordered'>";
-    echo "<thead>";
+    echo "<thead class = 'table-dark'>";
     echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
@@ -497,7 +497,7 @@ function renderAverages4($data) {
     $averages = computeAverages6($data);
     echo "<h2 class = 'display-font-sizes-1 text-center'>Terwujudnya Optimalisasi Kinerja Aparatur Kejaksaan </h2>";
     echo "<table class='table table-bordered'>";
-    echo "<thead>";
+    echo "<thead class = 'table-dark'>";
     echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
@@ -542,7 +542,7 @@ function renderAveragesForParts($part1, $part2, $part3) {
     $averageutama3 = computeAverages1($part3);
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Akuntabilitas dan Integritas Aparatur Kejaksaan RI</h2>";
     echo "<table class='table table-bordered'>";
-    echo "<thead>";
+    echo "<thead class = 'table-dark'>";
     echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
@@ -616,7 +616,7 @@ function renderAveragesForParts2($part1, $part2) {
     $averages2 = computeAverages($part2);
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Keberhasilan Penyelesaian Perkara Tindak Pidana</h2>";
     echo "<table class='table table-bordered'>";
-    echo "<thead>";
+    echo "<thead class = 'table-dark'>";
     echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
@@ -671,8 +671,9 @@ function renderAveragesForParts3($part1, $part2) {
     $averages1 = computeAverages5($part1);
     $averages2 = computeAverages5($part2);
     echo "<h2 class = 'display-font-sizes-1 text-center'>Meningkatnya Pengembalian Aset dan Kerugian Negara</h2>";
+
     echo "<table class='table table-bordered'>";
-    echo "<thead>";
+    echo "<thead class = 'table-dark'>";
     echo "<tr><th rowspan='2'>Indikator Kinerja Utama</th><th>Target</th><th class='text-center' colspan='9'>Capaian Kinerja</th></tr>"; // Main header
     echo "<tr><th></th>
     <th data-tw='1'>TW1</th>
@@ -693,7 +694,7 @@ function renderAveragesForParts3($part1, $part2) {
     $color = ($verification === "Tercapai") ? "green" : "red"; 
     echo "<tbody>";
     echo "<tr>";
-    echo "<td> 5.1 Persentase penyelamatan dan pengembalian kerugian negara melalui jalur pidana</td>"; // Description of the strategic goal
+    echo "<td> 5.1 Persentase penyelamatan dan pengembalian kerugian negara melalui jalur pidana</td>";
     echo '<td>85</td>';
     echo "<td data-tw='1'>" . number_format($averages1['tw1_avg'], 2) . "</td>";
     echo "<td data-tw='1'>" . number_format($averages1['tw1_real_avg'], 2) . "</td>";
@@ -732,7 +733,7 @@ function renderAveragesForParts3($part1, $part2) {
 function renderTable($data, $tableId) {
     if (!empty($data)) {
         echo "<table id='$tableId' class='table table-bordered'>";
-        echo "<thead>
+        echo "<thead class = 'table-dark'>
             <tr>
                 <th>ID Satker</th>
                 <th>Satker Nama</th>
@@ -860,7 +861,8 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Capaian SAKIP Kejaksaan RI</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src = "js/bootstrap.bundle.min.js"> </script>
+    <script src = "js/bootstrap.min.js"> </script>
+    <script src = "js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" >
     document.addEventListener('DOMContentLoaded', function() {
     const rowsPerPage = 10;
@@ -1001,7 +1003,8 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 
     </script>
 </head>
-<body>
+
+<body style="background-image: url('images/BG1.jpg');">
 <nav class="navbar navbar-light bg-warning-subtle mb-2 p-1 nav">
     <div class="container col">
     <a class="navbar-brand">
