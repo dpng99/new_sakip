@@ -57,7 +57,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
                         <title>Detail Satker</title>
                         
                     </head>
-                    <body>
+                    <body style="background-image: url('images/BG1.jpg');">
                     <nav class="navbar navbar-light bg-warning-subtle mb-2 p-1 nav">
                         <div class="container">
                         <a class="navbar-brand">

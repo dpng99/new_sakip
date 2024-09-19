@@ -89,7 +89,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['Pass'])) {
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style="background-image: url('images/BG1.jpg');">
 <nav class="navbar navbar-light bg-warning-subtle mb-2 p-1 nav">
     <div class="container">
     <a class="navbar-brand">
